@@ -1,2 +1,46 @@
 @use './variables';
 
+:root {
+    --color-text: #2D2E32;
+    --color-text-secondary: #767676;
+    --color-accent: #955DE1;
+
+    --header-height: 4rem;
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: local('Montserrat-Medium'), url('@/assets/fonts/Montserrat-Medium.ttf') format('opentype');
+}
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: local('Montserrat-Bold'), url('@/assets/fonts/Montserrat-Bold.ttf') format('opentype');
+}
+@font-face {
+    font-family: 'Montserrat-ExtraBold';
+    src: local('Montserrat-ExtraBold'), url('@/assets/fonts/Montserrat-ExtraBold.ttf') format('opentype');
+}
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: local('Montserrat-Regular'), url('@/assets/fonts/Montserrat-Regular.ttf') format('opentype');
+}
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: local('Montserrat-SemiBold'), url('@/assets/fonts/Montserrat-SemiBold.ttf') format('opentype');
+}
+@font-face {
+    font-family: 'Mulish';
+    src: local('Mulish-VariableFont_wght'), url('@/assets/fonts/Mulish-VariableFont_wght.ttf') format('opentype');
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {}
+
+a { text-decoration: none; }

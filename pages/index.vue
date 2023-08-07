@@ -1,11 +1,15 @@
 <script setup>
-const route = useRoute()
+const route = useRoute();
 </script>
 
 <template>
-  <div>
-    <h1>Nuxt Routing set up successfully!</h1>
-    <p>Current route: {{ route.path }}</p>
-    <a href="https://nuxt.com/docs/getting-started/routing" target="_blank">Learn more about Nuxt Routing</a>
-  </div>
+  <main :class='$style[`main-layout`]'>
+    <Hero />
+  </main>
 </template>
+
+<style module lang='scss'>
+.main-layout {
+  // margin-top: var(--header-height);
+}
+</style>
