@@ -1,0 +1,27 @@
+<template>
+    <a :class='$style.link'>
+        <slot />
+    </a>
+</template>
+
+<style module lang='scss'>
+.link {
+    position: relative;
+    display: inline-block;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+
+        border-radius: .25rem;
+        opacity: .1;
+        transition: $transition-sm;
+        z-index: -1;
+    }
+    &:hover::before {
+        margin: -.25rem;
+        background-color: var(--color-main);
+    }
+}
+</style>

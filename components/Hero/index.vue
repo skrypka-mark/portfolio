@@ -4,7 +4,7 @@ import Container from '~/components/Container';
 
 <template>
     <Container>
-        <section :class='$style.hero'>
+        <section id='home' :class='$style.hero'>
             <div :class='$style.wrapper'>
                 <HeroImage />
                 <HeroContent />
@@ -17,8 +17,6 @@ import Container from '~/components/Container';
 .hero {
     display: flex;
     align-items: center;
-
-    border: 1px solid;
 
     height: 100vh;
 

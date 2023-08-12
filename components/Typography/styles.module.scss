@@ -2,71 +2,73 @@
     font-family: 'Montserrat-Bold';
     font-size: 4rem;
     font-weight: 700;
+    font-style: normal;
     line-height: 60px;
     letter-spacing: 3.84px;
-    color: var(--color-text);
+
+    color: var(--color-font-main);
 }
 .h2 {
     font-family: 'Montserrat-Bold';
+    font-size: 1.5rem;
     font-weight: 700;
-    font-size: 40px;
-    line-height: 49px;
-    letter-spacing: 0.05em;
-    color: var(--color-text);
+    font-style: normal;
+    line-height: normal;
+
+    color: var(--color-font-main);
 }
 .h3 {
     font-family: 'Montserrat-Bold';
+    font-size: 1.125rem;
     font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    color: var(--color-text);
+    font-style: normal;
+    line-height: normal;
+
+    color: var(--color-font-main);
 }
 .h4 {
     font-family: 'Montserrat-Bold';
+    font-size: 0.875rem;
     font-weight: 700;
-    font-size: 22px;
-    line-height: 27px;
-    color: var(--color-text);
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.77px;
 
-    &[dark] {
-        color: var(--black);
-    }
-}
-.h5 {
-    font-family: 'Montserrat-Bold';
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--color-text);
-
-    &[dark] {
-        color: var(--black);
-    }
+    color: var(--color-font-main);
 }
 .body {
     font-family: 'Mulish';
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     line-height: normal;
     letter-spacing: 0.72px;
-    color: var(--color-text-secondary);
+
+    color: var(--color-font-body);
 }
 .button {
-    font-family: 'Montserrat-Bold';
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 160%;
-    color: var(--color-button-text);
+    font-family: 'Montserrat-Medium';
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.77px;
+
+    color: var(--color-font-main);
 }
 .caption {
-    font-family: 'Montserrat-Regular';
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    text-transform: uppercase;
-    color: var(--color-text);
+    font-family: 'Montserrat-Bold';
+    font-size: 1.125rem;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
 
-    &[dark] {
-        color: var(--black);
-    }
+    text-transform: uppercase;
+    color: var(--color-main);
+}
+.link {
+    font-family: 'Montserrat-Bold';
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
 }

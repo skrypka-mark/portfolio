@@ -1,3 +1,13 @@
+<script setup>
+import Link from '~/components/Link';
+
+const skills = [
+    'vue',
+    'react',
+    'nuxt'
+];
+</script>
+
 <template>
     <div :class='$style[`hero-content`]'>
         <div :class='$style.heading'>
@@ -7,14 +17,23 @@
             </Typography>
         </div>
         <div :class='$style[`socials-group`]'>
-            <a href='#' target='_blank'>
-                <Icon name='mdi:linkedin' size='1.8rem' />
+            <a href='https://www.linkedin.com/in/mark-skrypka-a19b051bb' target='_blank'>
+                <Icon name='mdi:linkedin' size='2rem' />
             </a>
-            <a href='#' target='_blank'>
-                <Icon name='mdi:github' size='1.8rem' />
+            <a href='https://github.com/skrypka-mark' target='_blank'>
+                <Icon name='mdi:github' size='2rem' />
+            </a>
+            <a href='https://www.upwork.com/freelancers/~0170e4ec789ff7ddfc' target='_blank'>
+                <Icon name='cib:upwork' size='2rem' />
             </a>
         </div>
-        <Skills :skills='[`vue`, `react`, `nuxt`, `next`, `node`, `express`]' :class='$style.skills' />
+        <SkillsList :skills=skills class='mt-auto'>
+            <template #additional>
+                <Link href='https://figma.com/' target='_blank'>
+                    <Skill skill='figma' />
+                </Link>
+            </template>
+        </SkillsList>
     </div>
 </template>
 
@@ -38,20 +57,6 @@
     & > .socials-group {
         display: flex;
         column-gap: 10px;
-
-        a {
-            cursor: pointer;
-
-            transition: color .2s ease-in-out;
-            color: var(--color-text);
-
-            &:hover {
-                color: var(--color-accent);
-            }
-        }
-    }
-    & > .skills {
-        margin-top: auto;
     }
 }
 </style>

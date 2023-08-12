@@ -1,9 +1,21 @@
-@use './variables';
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 :root {
-    --color-text: #2D2E32;
-    --color-text-secondary: #767676;
-    --color-accent: #955DE1;
+    --color-main: #9A66E2;
+
+    --color-font-main: #2D2E32;
+    --color-font-body: #767676;
+
+    --color-body-bg: #EAEAEA;
+    --color-main-bg: rgba(231, 231, 231, .5);
+    --color-card-bg: rgba(248, 248, 248, .4);
+    --color-section-bg: rgba(249, 249, 249, .2);
 
     --header-height: 4rem;
 }
@@ -33,14 +45,25 @@
     src: local('Mulish-VariableFont_wght'), url('@/assets/fonts/Mulish-VariableFont_wght.ttf') format('opentype');
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+body {
+    background-color: var(--color-body-bg);
 }
 
-body {}
+a {
+    text-decoration: none;
+    color: var(--color-font-main);
+    transition: $transition-sm;
 
-a { text-decoration: none; }
+    &:hover,
+    &.link-active {
+        color: var(--color-main);
+    }
+}
+
+button,
+input,
+textarea {
+    background: none;
+    border: none;
+    outline: none;
+}
