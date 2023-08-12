@@ -24,7 +24,7 @@ const contactLinks = [
 
 <style module lang='scss'>
 .footer {
-    background: rgba(249, 249, 249, .2);
+    background: var(--color-section-bg);
     padding-block: $section-spaces;
 
     .contact-links {

@@ -4,6 +4,7 @@ import Container from '~/components/Container';
 
 <template>
     <Container>
+        <SvgoEllipse1 :class='$style.ellipse' />
         <section id='home' :class='$style.hero'>
             <div :class='$style.wrapper'>
                 <HeroImage />
@@ -14,6 +15,17 @@ import Container from '~/components/Container';
 </template>
 
 <style module lang='scss'>
+.ellipse {
+    position: absolute;
+    top: 15px;
+    left: -215px;
+
+    width: 689.42px;
+    height: 498.858px;
+    z-index: -1;
+
+    filter: blur(242px);
+}
 .hero {
     display: flex;
     align-items: center;

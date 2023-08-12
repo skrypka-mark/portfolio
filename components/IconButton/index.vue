@@ -3,12 +3,14 @@ defineProps({ iconName: String });
 </script>
 
 <template>
-    <button :class='$style[`icon-button`]'>
-        <Icon :name=iconName size='1.7rem' />
-        <Typography variant='button'>
-            <slot />
-        </Typography>
-    </button>
+    <a target='_blank'>
+        <button :class='$style[`icon-button`]'>
+            <Icon :name=iconName size='1.7rem' />
+            <Typography variant='button' class='text-inherit'>
+                <slot />
+            </Typography>
+        </button>
+    </a>
 </template>
 
 <style module lang='scss'>
@@ -16,5 +18,7 @@ defineProps({ iconName: String });
     display: flex;
     align-items: center;
     column-gap: 5px;
+
+    color: inherit;
 }
 </style>

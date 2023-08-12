@@ -10,6 +10,7 @@ defineProps({ is: { type: String, default: 'div' } });
 
 <style module lang='scss'>
 .container {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     // padding: 0 120px;

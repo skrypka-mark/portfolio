@@ -10,25 +10,27 @@ const links = [
 </script>
 
 <template>
-    <div :class='$style.header'>
-        <Container is='nav' :class='$style.nav'>
-            <NuxtLink :class='$style.logo' :to='{ path: `/` }'>
-                <SvgoLogo />
-            </NuxtLink>
-            <ul :class='$style[`nav-links`]'>
-                <li :key=link v-for='link in links'>
-                    <Typography
-                        variant='link'
-                        :is=NuxtLink
-                        :class='[$style.link, { "link-active": $route.hash === link.value }]'
-                        :to='{ path: `/`, hash: link.value }'
-                    >
-                        {{ link.label }}
-                    </Typography>
-                </li>
-            </ul>
-        </Container>
-    </div>
+    <Teleport to='body'>
+        <div :class='$style.header'>
+            <Container is='nav' :class='$style.nav'>
+                <NuxtLink :class='$style.logo' :to='{ path: `/` }'>
+                    <SvgoLogo />
+                </NuxtLink>
+                <ul :class='$style[`nav-links`]'>
+                    <li :key=link v-for='link in links'>
+                        <Typography
+                            variant='link'
+                            :is=NuxtLink
+                            :class='[$style.link, { "link-active": $route.hash === link.value }]'
+                            :to='{ path: `/`, hash: link.value }'
+                        >
+                            {{ link.label }}
+                        </Typography>
+                    </li>
+                </ul>
+            </Container>
+        </div>
+    </Teleport>
 </template>
 
 <style module lang='scss'>
@@ -50,8 +52,6 @@ const links = [
         height: 100%;
 
         .logo {
-            // width: 100px;
-            // height: 100px;
             & > svg {
                 height: 1rem;
             }
