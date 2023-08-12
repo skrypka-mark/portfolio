@@ -63,7 +63,7 @@ const projects = [
 
     width: 689.42px;
     height: 498.858px;
-    z-index: -1;
+    z-index: -3;
 
     filter: blur(227px);
 }
@@ -74,7 +74,7 @@ const projects = [
 
     width: 689.42px;
     height: 498.858px;
-    z-index: -1;
+    z-index: -3;
 
     filter: blur(227px);
 }
@@ -85,7 +85,7 @@ const projects = [
 
     width: 948.439px;
     height: 548.983px;
-    z-index: -1;
+    z-index: -3;
 
     filter: blur(227px);
 }

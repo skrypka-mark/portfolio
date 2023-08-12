@@ -22,7 +22,7 @@ import Container from '~/components/Container';
 
     width: 689.42px;
     height: 498.858px;
-    z-index: -1;
+    z-index: -3;
 
     filter: blur(242px);
 }

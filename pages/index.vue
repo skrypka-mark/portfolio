@@ -24,7 +24,7 @@ const route = useRoute();
 .darken-overlay {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
 
   background-color: var(--color-main-bg);
   backdrop-filter: blur(122px);
