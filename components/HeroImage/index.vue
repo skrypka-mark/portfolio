@@ -11,7 +11,7 @@
 
     border: 2px solid rgba(0, 0, 0, .5);
 
-    background-image: url('/img/hero.png');
+    background-image: url('img/hero.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
