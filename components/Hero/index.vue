@@ -36,6 +36,7 @@ import Container from '~/components/Container';
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
         column-gap: 5rem;
 
         width: 100%;

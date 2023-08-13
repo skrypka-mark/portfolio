@@ -3,7 +3,12 @@
 export default defineNuxtConfig({
   // devtools: { enabled: true },
   ssr: false,
-  modules: ['nuxt-icon', 'nuxt-svgo', '@nuxtjs/tailwindcss'],
+  modules: [
+    'nuxt-icon',
+    'nuxt-svgo',
+    '@vueuse/nuxt',
+    '@nuxtjs/tailwindcss'
+  ],
   svgo: {
     autoImportPath: './assets/icons/',
     defaultImport: 'component'

@@ -8,12 +8,44 @@ defineProps({
     github: String,
     figma: String
 });
+
+const projectImageRef = ref(null);
+const projectImageSpecs = ref(null);
+const isProjectImageModalShown = ref(false);
+const isProjectImageVisible = ref(false);
+const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 100 });
+
+const closeProjectImageModal = () => {
+    isProjectImageModalShown.value = false;
+};
+const toggleProjectImageVisibility = value => {
+    isProjectImageVisible.value = typeof value === 'boolean' ? value : !isProjectImageVisible.value;
+};
+
+watch(isProjectImageHovered, val => {
+    if(!projectImageRef.value && val) return;
+
+    isProjectImageModalShown.value = true;
+
+    const { width, height, top, left } = projectImageRef.value.getBoundingClientRect();
+    const { borderRadius } = getComputedStyle(projectImageRef.value);
+
+    projectImageSpecs.value = { width, height, top, left, borderRadius };
+});
 </script>
 
 <template>
     <article :class='$style[`project-card`]'>
         <div :class='$style[`project-card__image-container`]'>
-            <img :src=image :class='$style[`project-card__image`]' />
+            <img :src=image :class='$style[`project-card__image`]' ref=projectImageRef v-if=!isProjectImageVisible />
+            <ProjectImageModal
+                :open=isProjectImageModalShown
+                :image-visible=isProjectImageVisible
+                :image=image
+                :imageSpecs=projectImageSpecs
+                @close=closeProjectImageModal
+                @toggle-image-visibility=toggleProjectImageVisibility
+            />
         </div>
         <div class='flex flex-col items-center px-[5.5rem]'>
             <a :href=preview target='_blank'>

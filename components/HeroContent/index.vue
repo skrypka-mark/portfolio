@@ -13,7 +13,7 @@ const skills = [
         <div :class='$style.heading'>
             <Typography variant='h1' :class='$style.title'>Frontend Developer</Typography>
             <Typography variant='body'>
-                Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine
+                Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine. Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine.
             </Typography>
         </div>
         <div :class='$style[`socials-group`]'>
@@ -52,6 +52,8 @@ const skills = [
 
         .title {
             text-transform: uppercase;
+
+            // width: min-content;
         }
     }
     & > .socials-group {

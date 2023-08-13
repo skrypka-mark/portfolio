@@ -17,6 +17,7 @@
     "nuxt-svgo": "^3.4.0"
   },
   "dependencies": {
+    "@vueuse/nuxt": "^10.3.0",
     "sass": "^1.64.2"
   }
 }
