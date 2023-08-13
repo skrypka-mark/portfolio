@@ -13,7 +13,7 @@ const projectImageRef = ref(null);
 const projectImageSpecs = ref(null);
 const isProjectImageModalShown = ref(false);
 const isProjectImageVisible = ref(false);
-const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 100 });
+const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 1000 });
 
 const closeProjectImageModal = () => {
     isProjectImageModalShown.value = false;
