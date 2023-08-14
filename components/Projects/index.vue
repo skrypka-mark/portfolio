@@ -10,18 +10,18 @@ const projects = [
         figma: '#'
     },
     {
-        name: 'Sportage',
+        name: 'Traveller',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        image: '/img/projects/sportage.png',
+        image: '/img/projects/traveller.jpg',
         preview: '#',
         skills: ['nuxt', 'express', 'scss'],
         github: '#',
         figma: '#'
     },
     {
-        name: 'District',
+        name: 'Gymate',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        image: '/img/projects/district.png',
+        image: '/img/projects/gymate.jpg',
         preview: '#',
         skills: ['nuxt', 'express', 'scss'],
         github: '#',

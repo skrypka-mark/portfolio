@@ -48,6 +48,10 @@
 body {
     background-color: var(--color-body-bg);
     overflow-x: hidden;
+
+    &.prevent-scroll {
+        overflow: hidden;
+    }
 }
 
 a {

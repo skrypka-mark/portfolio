@@ -13,7 +13,8 @@ const projectImageRef = ref(null);
 const projectImageSpecs = ref(null);
 const isProjectImageModalShown = ref(false);
 const isProjectImageVisible = ref(false);
-const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 1000 });
+const timeout = ref(null);
+// const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 1000 });
 
 const closeProjectImageModal = () => {
     isProjectImageModalShown.value = false;
@@ -22,31 +23,52 @@ const toggleProjectImageVisibility = value => {
     isProjectImageVisible.value = typeof value === 'boolean' ? value : !isProjectImageVisible.value;
 };
 
-watch(isProjectImageHovered, val => {
-    if(!projectImageRef.value && val) return;
+// watch(isProjectImageHovered, val => {
+//     if(!projectImageRef.value && !val) return;
 
-    isProjectImageModalShown.value = true;
+//     isProjectImageModalShown.value = true;
 
-    const { width, height, top, left } = projectImageRef.value.getBoundingClientRect();
-    const { borderRadius } = getComputedStyle(projectImageRef.value);
+//     const { width, height, top, left } = projectImageRef.value.getBoundingClientRect();
+//     const { borderRadius } = getComputedStyle(projectImageRef.value);
 
-    projectImageSpecs.value = { width, height, top, left, borderRadius };
-});
+//     projectImageSpecs.value = { width, height, top, left, borderRadius };
+// });
+
+const projectImageMouseOver = () => {
+    clearTimeout(timeout.value);
+    if(!projectImageRef.value.$el) return;
+
+    timeout.value = setTimeout(() => {
+        const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
+        const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
+
+        projectImageSpecs.value = { width, height, top, left, borderRadius };
+        isProjectImageModalShown.value = true;
+    }, 200);
+};
+const projectImageMouseOut = () => {
+    clearTimeout(timeout.value);
+};
 </script>
 
 <template>
     <article :class='$style[`project-card`]'>
-        <div :class='$style[`project-card__image-container`]'>
-            <img :src=image :class='$style[`project-card__image`]' ref=projectImageRef v-if=!isProjectImageVisible />
-            <ProjectImageModal
-                :open=isProjectImageModalShown
-                :image-visible=isProjectImageVisible
-                :image=image
-                :imageSpecs=projectImageSpecs
-                @close=closeProjectImageModal
-                @toggle-image-visibility=toggleProjectImageVisibility
+        <!-- <div :class='$style[`project-card__image-container`]' ref=projectImageRef>
+            <img
+                :src=image
+                :class='$style[`project-card__image`]'
+                @mouseover=projectImageMouseOver
+                @mouseout=projectImageMouseOut
+                v-if=!isProjectImageVisible
             />
-        </div>
+        </div> -->
+        <ProjectCardImage
+            :image=image
+            :visible=!isProjectImageVisible
+            @mouseover=projectImageMouseOver
+            @mouseout=projectImageMouseOut
+            ref=projectImageRef
+        />
         <div class='flex flex-col items-center px-[5.5rem]'>
             <a :href=preview target='_blank'>
                 <Typography variant='h3' class='mb-4 text-center'>
@@ -69,6 +91,15 @@ watch(isProjectImageHovered, val => {
                 <IconButton iconName='fluent:share-20-filled' :href=preview>Preview</IconButton>
             </div>
         </div>
+        <ProjectImageModal
+            :open=isProjectImageModalShown
+            :link=preview
+            :image-visible=isProjectImageVisible
+            :image=image
+            :imageSpecs=projectImageSpecs
+            @close=closeProjectImageModal
+            @toggle-image-visibility=toggleProjectImageVisibility
+        />
     </article>
 </template>
 
@@ -80,18 +111,20 @@ watch(isProjectImageHovered, val => {
     height: 24rem;
 
     background: var(--color-card-bg);
+    padding: $border-radius-sm;
     box-shadow: $box-shadow-main;
     border-radius: $border-radius;
-    overflow: hidden;
+    // overflow: hidden;
 
     & > .project-card__image-container {
         height: 100%;
-        aspect-ratio: 1.6 / 1;
-        padding: $border-radius-sm;
+        aspect-ratio: 3.2 / 1;
+        border-radius: $border-radius-sm;
+        overflow: hidden;
 
         & > .project-card__image {
-            height: 100%;
-            border-radius: $border-radius-sm;
+            width: 100%;
+            // height: auto;
             box-shadow: $box-shadow-secondary;
             cursor: pointer;
         }

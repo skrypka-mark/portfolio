@@ -1,25 +1,56 @@
 <script setup>
-const props = defineProps({ open: Boolean, imageVisible: Boolean, image: String, imageSpecs: Object });
+const props = defineProps({
+    open: Boolean,
+    link: String,
+    imageVisible: Boolean,
+    image: String,
+    imageSpecs: Object
+});
 const emits = defineEmits(['close', 'toggleImageVisibility']);
 
-const transitionend = () => {
+const timeout = ref(null);
+
+// const projectImageModalTransitionend = () => {
+    // if(!props.open) {
+        // timeout.value = setTimeout(() => emits('toggleImageVisibility', false), 1000);
+    // }
+// };
+const imageModalTransitionend = () => {
     if(!props.open) {
-        // imageVisible.value = false;
-        emits('toggleImageVisibility', false);
+        emits('toggleImageVisibility', false)
     }
 };
+const projectImageModalMouseOut = () => emits('close');
+
+watch(() => props.imageVisible, value => {
+    document.body.classList[value ? 'add' : 'remove']('prevent-scroll');
+});
 </script>
 
 <template>
     <Teleport to='body'>
         <!-- <div :class='$style[`project-image-modal`]'> -->
             <!-- <Transition name='backdrop' mode='out-in' @before-enter='isImageVisible = true'> -->
-            <Transition name='backdrop' mode='out-in' @before-enter='emits(`toggleImageVisibility`, true)'>
-                <div :class='$style.backdrop' @click='emits(`close`)' v-if=open />
-            </Transition>
-            <!-- <Transition name='fade-image' mode='out-in'> -->
-                <img :src=image :class='[$style.image, { [$style.open]: open, [$style.close]: !open }]' @animationend=transitionend v-if=imageVisible />
-            <!-- </Transition> -->
+            <a :href=link target='_blank'>
+                <Transition name='backdrop' mode='out-in' @before-enter='emits(`toggleImageVisibility`, true)'>
+                    <div
+                        :class='$style.backdrop'
+                        :style='{ zIndex: open ? 8 : 7 }'
+                        @click='emits(`close`)'
+                        v-if=open
+                    />
+                </Transition>
+                <!-- <Transition name='fade-image' mode='out-in'> -->
+                    <div
+                        :class='[$style[`image-container`], { [$style.open]: open, [$style.close]: !open }]'
+                        :style='{ zIndex: open ? 10 : 9 }'
+                        @mouseout=projectImageModalMouseOut
+                        v-if=imageVisible
+                    >
+                        <img :src=image :class='$style.image' @transitionend=imageModalTransitionend />
+                    </div>
+                <!-- </Transition> -->
+            </a>
         <!-- </div> -->
     </Teleport>
 </template>
@@ -56,26 +87,17 @@ const transitionend = () => {
 //         border-radius: v-bind('imageSpecs?.borderRadius');
 //     }
 // }
-.fade-image {
-    &-enter-active,
-    &-leave-active {
-        transition: all $transition;
-    }
+// .fade-image {
+//     &-enter-active,
+//     &-leave-active {
+//         transition: all $transition;
+//     }
 
-    &-enter-from {
-        opacity: 0;
-    }
-    &-leave-to {
-        opacity: 0;
-    }
-
-    // &-enter-to {
-    //     opacity: 1;
-    // }
-    // &-leave-from {
-    //     opacity: 1;
-    // }
-}
+//     &-enter-from,
+//     &-leave-to {
+//         opacity: 0;
+//     }
+// }
 .backdrop {
     &-enter-active,
     &-leave-active {
@@ -98,19 +120,19 @@ const transitionend = () => {
         border-radius: v-bind('imageSpecs?.borderRadius');
     }
     to {
-        top: var(--header-height);
+        top: 5%;
         left: 10%;
         width: 80%;
-        height: 80%;
+        height: 90%;
         border-radius: $border-radius-lg;
     }
 }
 @keyframes scale-down {
     from {
-        top: var(--header-height);
+        top: 5%;
         left: 10%;
         width: 80%;
-        height: 80%;
+        height: 90%;
         border-radius: $border-radius-lg;
     }
     to {
@@ -122,11 +144,7 @@ const transitionend = () => {
     }
 }
 
-// .project-image-modal {
-    // position: fixed;
-    // inset: 0;
-
-    .image {
+.image-container {
         position: fixed;
         // top: var(--header-height);
         // left: 10%;
@@ -135,12 +153,16 @@ const transitionend = () => {
         // height: 80%;
         // border-radius: $border-radius-lg;
 
+        box-shadow: $box-shadow-secondary;
+        cursor: pointer;
+        overflow: hidden;
+
         &.open {
-            top: var(--header-height);
+            top: 5%;
             left: 10%;
 
             width: 80%;
-            height: 80%;
+            height: 90%;
             border-radius: $border-radius-lg;
 
             animation: scale-up $transition;
@@ -155,13 +177,21 @@ const transitionend = () => {
 
             animation: scale-down $transition;
         }
+    .image {
+        transform: translateY(0);
+        transition: transform 1s ease-in-out;
+
+        &:hover {
+            --translate-y: calc(-100% + 90vh);
+
+            transform: translateY(var(--translate-y));
+            transition: transform 15s linear;
+        }
     }
-// }
+}
 .backdrop {
     position: fixed;
     inset: 0;
-    // width: 100vw;
-    // height: 100vh;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .7);
 }
 </style>
