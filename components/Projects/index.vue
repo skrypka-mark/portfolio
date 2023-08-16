@@ -1,14 +1,14 @@
 <script setup>
 const projects = [
-    {
-        name: 'MakerPlace',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        image: '/img/projects/maker-place.png',
-        preview: '#',
-        skills: ['nuxt', 'express', 'scss'],
-        github: '#',
-        figma: '#'
-    },
+    // {
+    //     name: 'MakerPlace',
+    //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+    //     image: '/img/projects/maker-place.png',
+    //     preview: '#',
+    //     skills: ['nuxt', 'express', 'scss'],
+    //     github: '#',
+    //     figma: '#'
+    // },
     {
         name: 'Traveller',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
@@ -27,15 +27,15 @@ const projects = [
         github: '#',
         figma: '#'
     },
-    {
-        name: 'Creativecoder',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        image: '/img/projects/creativecoder.png',
-        preview: '#',
-        skills: ['nuxt', 'express', 'scss'],
-        github: '#',
-        figma: '#'
-    }
+    // {
+    //     name: 'Creativecoder',
+    //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+    //     image: '/img/projects/creativecoder.png',
+    //     preview: '#',
+    //     skills: ['nuxt', 'express', 'scss'],
+    //     github: '#',
+    //     figma: '#'
+    // }
 ];
 </script>
 

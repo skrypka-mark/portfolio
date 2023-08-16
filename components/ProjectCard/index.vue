@@ -10,6 +10,7 @@ defineProps({
 });
 
 const projectImageRef = ref(null);
+const imageRef = ref(null);
 const projectImageSpecs = ref(null);
 const isProjectImageModalShown = ref(false);
 const isProjectImageVisible = ref(false);
@@ -36,18 +37,30 @@ const toggleProjectImageVisibility = value => {
 
 const projectImageMouseOver = () => {
     clearTimeout(timeout.value);
-    if(!projectImageRef.value.$el) return;
+    if(!projectImageRef.value.$el && !imageRef.value.$el) return;
 
     timeout.value = setTimeout(() => {
         const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
         const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
+        const { transform } = getComputedStyle(projectImageRef.value.$el.children[0]);
 
-        projectImageSpecs.value = { width, height, top, left, borderRadius };
+        projectImageSpecs.value = { width, height, top, left, borderRadius, transform };
         isProjectImageModalShown.value = true;
-    }, 200);
+    }, 1500);
 };
 const projectImageMouseOut = () => {
     clearTimeout(timeout.value);
+};
+const projectImageClick = () => {
+    clearTimeout(timeout.value);
+    if(!projectImageRef.value.$el && !imageRef.value.$el) return;
+
+    const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
+    const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
+    const { transform } = getComputedStyle(projectImageRef.value.$el.children[0]);
+
+    projectImageSpecs.value = { width, height, top, left, borderRadius, transform };
+    isProjectImageModalShown.value = true;
 };
 </script>
 
@@ -67,6 +80,7 @@ const projectImageMouseOut = () => {
             :visible=!isProjectImageVisible
             @mouseover=projectImageMouseOver
             @mouseout=projectImageMouseOut
+            @click=projectImageClick
             ref=projectImageRef
         />
         <div class='flex flex-col items-center px-[5.5rem]'>
@@ -93,9 +107,8 @@ const projectImageMouseOut = () => {
         </div>
         <ProjectImageModal
             :open=isProjectImageModalShown
-            :link=preview
-            :image-visible=isProjectImageVisible
             :image=image
+            :image-visible=isProjectImageVisible
             :imageSpecs=projectImageSpecs
             @close=closeProjectImageModal
             @toggle-image-visibility=toggleProjectImageVisibility

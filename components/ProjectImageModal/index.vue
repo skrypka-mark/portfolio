@@ -1,14 +1,14 @@
 <script setup>
 const props = defineProps({
     open: Boolean,
-    link: String,
-    imageVisible: Boolean,
     image: String,
+    imageVisible: Boolean,
     imageSpecs: Object
 });
 const emits = defineEmits(['close', 'toggleImageVisibility']);
 
 const timeout = ref(null);
+const imageTransition = ref(false);
 
 // const projectImageModalTransitionend = () => {
     // if(!props.open) {
@@ -17,10 +17,12 @@ const timeout = ref(null);
 // };
 const imageModalTransitionend = () => {
     if(!props.open) {
-        emits('toggleImageVisibility', false)
+        emits('toggleImageVisibility', false);
     }
 };
-const projectImageModalMouseOut = () => emits('close');
+const close = () => {
+    emits('close');
+};
 
 watch(() => props.imageVisible, value => {
     document.body.classList[value ? 'add' : 'remove']('prevent-scroll');
@@ -31,26 +33,39 @@ watch(() => props.imageVisible, value => {
     <Teleport to='body'>
         <!-- <div :class='$style[`project-image-modal`]'> -->
             <!-- <Transition name='backdrop' mode='out-in' @before-enter='isImageVisible = true'> -->
-            <a :href=link target='_blank'>
-                <Transition name='backdrop' mode='out-in' @before-enter='emits(`toggleImageVisibility`, true)'>
-                    <div
-                        :class='$style.backdrop'
-                        :style='{ zIndex: open ? 8 : 7 }'
-                        @click='emits(`close`)'
-                        v-if=open
+            <Transition
+                name='backdrop'
+                mode='out-in'
+                @before-enter='emits(`toggleImageVisibility`, true)'
+                @after-enter='imageTransition = true'
+                @after-leave='imageTransition = false'
+            >
+                <div
+                    :class='$style.backdrop'
+                    :style='{ zIndex: open ? 8 : 7 }'
+                    @click=close
+                    v-if=open
+                />
+            </Transition>
+            <!-- <Transition name='fade-image' mode='out-in'> -->
+                <div
+                    :class='[$style[`image-container`], { [$style.open]: open, [$style.close]: !open }]'
+                    :style='{ zIndex: open ? 10 : 9 }'
+                    @click=close
+                    v-if=imageVisible
+                >
+                    <img
+                        :src=image
+                        :class='[
+                            $style.image, {
+                                [$style.open]: imageTransition,
+                                [$style.close]: !imageTransition && !open
+                            }
+                        ]'
+                        @transitionend=imageModalTransitionend
                     />
-                </Transition>
-                <!-- <Transition name='fade-image' mode='out-in'> -->
-                    <div
-                        :class='[$style[`image-container`], { [$style.open]: open, [$style.close]: !open }]'
-                        :style='{ zIndex: open ? 10 : 9 }'
-                        @mouseout=projectImageModalMouseOut
-                        v-if=imageVisible
-                    >
-                        <img :src=image :class='$style.image' @transitionend=imageModalTransitionend />
-                    </div>
-                <!-- </Transition> -->
-            </a>
+                </div>
+            <!-- </Transition> -->
         <!-- </div> -->
     </Teleport>
 </template>
@@ -101,7 +116,7 @@ watch(() => props.imageVisible, value => {
 .backdrop {
     &-enter-active,
     &-leave-active {
-        transition: all $transition;
+        transition: all $transition-lg;
     }
 
     &-enter-from,
@@ -143,6 +158,22 @@ watch(() => props.imageVisible, value => {
         border-radius: v-bind('imageSpecs?.borderRadius');
     }
 }
+@keyframes scroll-down {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(calc(-100% + 90vh));
+    }
+}
+@keyframes scroll-top {
+    from {
+        transform: translateY(calc(-100% + 90vh));
+    }
+    to {
+        transform: translateY(0);
+    }
+}
 
 .image-container {
         position: fixed;
@@ -165,7 +196,14 @@ watch(() => props.imageVisible, value => {
             height: 90%;
             border-radius: $border-radius-lg;
 
-            animation: scale-up $transition;
+            animation: scale-up $transition-lg;
+
+            // & > .image {
+            //     --translate-y: calc(-100% + 90vh);
+
+            //     transform: translateY(var(--translate-y));
+            //     transition: transform 15s linear;
+            // }
         }
         &.close {
             top: v-bind('`${imageSpecs?.top}px`');
@@ -175,18 +213,42 @@ watch(() => props.imageVisible, value => {
             height: v-bind('`${imageSpecs?.height}px`');
             border-radius: v-bind('imageSpecs?.borderRadius');
 
-            animation: scale-down $transition;
+            animation: scale-down $transition-lg;
+
+            // & > .image {
+                // animation: scroll-down 2s ease-in-out alternate-reverse;
+
+                // transform: translateY(0);
+            // }
         }
-    .image {
-        transform: translateY(0);
-        transition: transform 1s ease-in-out;
+    & > .image {
+        transform: v-bind('imageSpecs?.transform');
 
-        &:hover {
+        &.open {
+            // animation: scroll-down 15s linear;
+
             --translate-y: calc(-100% + 90vh);
-
             transform: translateY(var(--translate-y));
             transition: transform 15s linear;
         }
+        &.close {
+            transform: translateY(0);
+            transition: transform .5s ease-in-out;
+        }
+
+        // position: absolute;
+        // top: 0;
+        // transform: translateY(0px);
+        // transition: transform 2s ease-in-out;
+
+        // &:hover {
+        //     --translate-y: calc(-100% + 90vh);
+        //     // --translate-y: calc(-100% + 90vh);
+
+        //     transform: translateY(var(--translate-y));
+        //     // top: var(--translate-y);
+        //     transition: transform 15s linear;
+        // }
     }
 }
 .backdrop {
