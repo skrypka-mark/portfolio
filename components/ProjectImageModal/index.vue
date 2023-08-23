@@ -116,10 +116,6 @@ watch(() => props.imageVisible, value => {
         width: 80%;
         height: 90%;
         border-radius: $border-radius-lg;
-
-        @media (max-width: $lg) {
-            border-radius: $border-radius;
-        }
     }
 }
 @keyframes scale-down {
@@ -129,10 +125,6 @@ watch(() => props.imageVisible, value => {
         width: 80%;
         height: 90%;
         border-radius: $border-radius-lg;
-
-        @media (max-width: $lg) {
-            border-radius: $border-radius;
-        }
     }
     to {
         top: v-bind('`${imageSpecs?.top}px`');
@@ -152,20 +144,22 @@ watch(() => props.imageVisible, value => {
         border-radius: v-bind('imageSpecs?.borderRadius');
     }
     to {
-        top: 5%;
-        left: 5%;
-        width: 90%;
-        height: 90%;
-        border-radius: $border-radius;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // border-radius: $border-radius;
+        border-radius: 0;
     }
 }
 @keyframes scale-down-mobile {
     from {
-        top: 5%;
-        left: 5%;
-        width: 90%;
-        height: 90%;
-        border-radius: $border-radius;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // border-radius: $border-radius;
+        border-radius: 0;
     }
     to {
         top: v-bind('`${imageSpecs?.top}px`');
@@ -229,10 +223,14 @@ watch(() => props.imageVisible, value => {
             animation: scale-up $transition-lg;
 
             @media (max-width: $lg) {
-                width: 90%;
-                left: 5%;
+                top: 0;
+                left: 0;
 
-                border-radius: $border-radius;
+                width: 100%;
+                height: 100%;
+
+                // border-radius: $border-radius;
+                border-radius: 0;
                 animation: scale-up-mobile $transition-lg;
             }
 
