@@ -7,9 +7,9 @@ export const PROJECTS_SPACES = 32;
 // https://router.vuejs.org/api/interfaces/routeroptions.html
 export default <RouterConfig> {
     scrollBehavior: async (to, from, savedPosition) => {
-        const isScrollOn = JSON.parse(to.params.scroll as string ?? 'false');
+        const isScrollOn = JSON.parse(to.params.scroll as string ?? 'true');
 
-        // if(!isScrollOn) return {};
+        if(!isScrollOn) return {};
 
         if(savedPosition) {
             return await new Promise(resolve => {

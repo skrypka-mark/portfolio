@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
     name: String,
     description: String,
     image: String,
@@ -9,6 +9,8 @@ defineProps({
     figma: String
 });
 
+const route = useRoute();
+
 const projectImageRef = ref(null);
 const imageRef = ref(null);
 const projectImageSpecs = ref(null);
@@ -16,11 +18,14 @@ const projectImageSpecs = ref(null);
 const isProjectImageModalShown = ref(false);
 const isProjectImageVisible = ref(false);
 const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 100 });
-const timeout = ref(null);
+// const timeout = ref(null);
 // const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 1000 });
 
 const closeProjectImageModal = () => {
-    isProjectImageModalShown.value = false;
+    // isProjectImageModalShown.value = false;
+    const query = Object({}, route.query);
+    delete query.image;
+    navigateTo({ hash: route.hash, query, params: { scroll: false } });
 };
 const toggleProjectImageVisibility = value => {
     isProjectImageVisible.value = typeof value === 'boolean' ? value : !isProjectImageVisible.value;
@@ -53,8 +58,10 @@ const toggleProjectImageVisibility = value => {
 // const projectImageMouseOut = () => {
 //     clearTimeout(timeout.value);
 // };
-const projectImageClick = () => {
-    clearTimeout(timeout.value);
+const projectImageClick = name => {
+    navigateTo({ hash: route.hash, query: { image: name?.toLowerCase() }, params: { scroll: false } });
+
+    // clearTimeout(timeout.value);
     if(!projectImageRef.value.$el && !imageRef.value.$el) return;
 
     const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
@@ -62,8 +69,11 @@ const projectImageClick = () => {
     const { transform } = getComputedStyle(projectImageRef.value.$el.children[0]);
 
     projectImageSpecs.value = { width, height, top, left, borderRadius, transform };
-    isProjectImageModalShown.value = true;
 };
+
+watch(() => route.query, query => {
+    isProjectImageModalShown.value = query?.image === props.name.toLowerCase();
+});
 </script>
 
 <template>
@@ -81,7 +91,7 @@ const projectImageClick = () => {
             :image=image
             :visible=!isProjectImageVisible
             :hovered=isProjectImageHovered
-            @click=projectImageClick
+            @click=projectImageClick(name)
             ref=projectImageRef
         />
         <div class='flex flex-col items-center md:px-[5.5rem]'>

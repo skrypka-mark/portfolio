@@ -269,6 +269,11 @@ watch(() => props.imageVisible, value => {
             // animation: scroll-down 15s linear;
 
             --translate-y: calc(-100% + 90vh);
+
+            @media (max-width: $lg) {
+                --translate-y: calc(-100% + 100vh);
+            }
+
             transform: translateY(var(--translate-y));
         }
         &.unhovered {
