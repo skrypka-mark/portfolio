@@ -6,7 +6,7 @@ defineProps({ iconName: String });
     <a target='_blank'>
         <button :class='$style[`icon-button`]'>
             <Icon :name=iconName size='1.7rem' />
-            <Typography variant='button' class='text-inherit'>
+            <Typography variant='button'>
                 <slot />
             </Typography>
         </button>

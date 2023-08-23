@@ -7,8 +7,10 @@ const props = defineProps({
 });
 const emits = defineEmits(['close', 'toggleImageVisibility']);
 
-const timeout = ref(null);
+const imageContainerRef = ref(null);
+
 const imageTransition = ref(false);
+const imageContainerHovered = useElementHover(imageContainerRef);
 
 // const projectImageModalTransitionend = () => {
     // if(!props.open) {
@@ -48,72 +50,46 @@ watch(() => props.imageVisible, value => {
                 />
             </Transition>
             <!-- <Transition name='fade-image' mode='out-in'> -->
-                <div
-                    :class='[$style[`image-container`], { [$style.open]: open, [$style.close]: !open }]'
-                    :style='{ zIndex: open ? 10 : 9 }'
-                    @click=close
-                    v-if=imageVisible
-                >
-                    <img
-                        :src=image
-                        :class='[
-                            $style.image, {
-                                [$style.open]: imageTransition,
-                                [$style.close]: !imageTransition && !open
-                            }
-                        ]'
-                        @transitionend=imageModalTransitionend
-                    />
-                </div>
+                <!-- <div :class='[$style[`fade-image`], { [$style.open]: open, [$style.close]: !imageTransition }]'> -->
+                    <div
+                        :class='[$style[`image-container`], { [$style.open]: open, [$style.close]: !open }]'
+                        :style='{ zIndex: open ? 10 : 9 }'
+                        @click=close
+                        ref=imageContainerRef
+                        v-if=imageVisible
+                    >
+                        <img
+                            :src=image
+                            :class='[
+                                $style.image, {
+                                    [$style.open]: imageTransition,
+                                    [$style.close]: !imageTransition && !open,
+                                    [$style.hovered]: imageTransition && open && imageContainerHovered,
+                                    [$style.unhovered]: !imageTransition && open && !imageContainerHovered
+                                }
+                            ]'
+                            @transitionend=imageModalTransitionend
+                        />
+                    </div>
+                <!-- </div> -->
             <!-- </Transition> -->
         <!-- </div> -->
     </Teleport>
 </template>
 
 <style lang='scss'>
-// .scale-image {
-//     &-enter-active,
-//     &-leave-active {
-//         transition: all 2s ease-out;
-//     }
-
-//     &-enter-to,
-//     &-leave-from {
-//         transform: translateX(10%) translateY(var(--header-height));
-//         // position: fixed;
-
-//         // top: var(--header-height);
-//         // left: 10%;
-
-//         width: 80%;
-//         height: 80%;
-//         border-radius: $border-radius-lg;
-//     }
-//     &-enter-from,
-//     &-leave-to {
-//         transform: translateX(v-bind('`${imageSpecs?.left}px`')) translateY(v-bind('`${imageSpecs?.top}px`'));
-//         // position: fixed;
-
-//         // top: v-bind('`${imageSpecs?.top}px`');
-//         // left: v-bind('`${imageSpecs?.left}px`');
-
-//         width: v-bind('`${imageSpecs?.width}px`');
-//         height: v-bind('`${imageSpecs?.height}px`');
-//         border-radius: v-bind('imageSpecs?.borderRadius');
-//     }
-// }
-// .fade-image {
-//     &-enter-active,
-//     &-leave-active {
-//         transition: all $transition;
-//     }
-
-//     &-enter-from,
-//     &-leave-to {
-//         opacity: 0;
-//     }
-// }
 .backdrop {
+    &-enter-active,
+    &-leave-active {
+        transition: all $transition-lg;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+    }
+}
+.fade-image {
     &-enter-active,
     &-leave-active {
         transition: all $transition-lg;
@@ -140,6 +116,10 @@ watch(() => props.imageVisible, value => {
         width: 80%;
         height: 90%;
         border-radius: $border-radius-lg;
+
+        @media (max-width: $lg) {
+            border-radius: $border-radius;
+        }
     }
 }
 @keyframes scale-down {
@@ -149,6 +129,10 @@ watch(() => props.imageVisible, value => {
         width: 80%;
         height: 90%;
         border-radius: $border-radius-lg;
+
+        @media (max-width: $lg) {
+            border-radius: $border-radius;
+        }
     }
     to {
         top: v-bind('`${imageSpecs?.top}px`');
@@ -158,6 +142,40 @@ watch(() => props.imageVisible, value => {
         border-radius: v-bind('imageSpecs?.borderRadius');
     }
 }
+
+@keyframes scale-up-mobile {
+    from {
+        top: v-bind('`${imageSpecs?.top}px`');
+        left: v-bind('`${imageSpecs?.left}px`');
+        width: v-bind('`${imageSpecs?.width}px`');
+        height: v-bind('`${imageSpecs?.height}px`');
+        border-radius: v-bind('imageSpecs?.borderRadius');
+    }
+    to {
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        border-radius: $border-radius;
+    }
+}
+@keyframes scale-down-mobile {
+    from {
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        border-radius: $border-radius;
+    }
+    to {
+        top: v-bind('`${imageSpecs?.top}px`');
+        left: v-bind('`${imageSpecs?.left}px`');
+        width: v-bind('`${imageSpecs?.width}px`');
+        height: v-bind('`${imageSpecs?.height}px`');
+        border-radius: v-bind('imageSpecs?.borderRadius');
+    }
+}
+
 @keyframes scroll-down {
     from {
         transform: translateY(0);
@@ -172,6 +190,18 @@ watch(() => props.imageVisible, value => {
     }
     to {
         transform: translateY(0);
+    }
+}
+
+.fade-image {
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+
+    &.open {
+        opacity: 1;
+    }
+    &.close {
+        opacity: 0;
     }
 }
 
@@ -198,6 +228,14 @@ watch(() => props.imageVisible, value => {
 
             animation: scale-up $transition-lg;
 
+            @media (max-width: $lg) {
+                width: 90%;
+                left: 5%;
+
+                border-radius: $border-radius;
+                animation: scale-up-mobile $transition-lg;
+            }
+
             // & > .image {
             //     --translate-y: calc(-100% + 90vh);
 
@@ -215,6 +253,10 @@ watch(() => props.imageVisible, value => {
 
             animation: scale-down $transition-lg;
 
+            @media (max-width: $lg) {
+                animation: scale-down-mobile $transition-lg;
+            }
+
             // & > .image {
                 // animation: scroll-down 2s ease-in-out alternate-reverse;
 
@@ -223,17 +265,23 @@ watch(() => props.imageVisible, value => {
         }
     & > .image {
         transform: v-bind('imageSpecs?.transform');
+        transition: transform 15s linear;
 
-        &.open {
+        &.hovered {
             // animation: scroll-down 15s linear;
 
             --translate-y: calc(-100% + 90vh);
             transform: translateY(var(--translate-y));
-            transition: transform 15s linear;
+        }
+        &.unhovered {
+            transform: translateY(0);
         }
         &.close {
             transform: translateY(0);
             transition: transform .5s ease-in-out;
+
+            // opacity: 0;
+            // transition: opacity $transition;
         }
 
         // position: absolute;

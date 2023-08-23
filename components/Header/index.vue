@@ -1,4 +1,6 @@
 <script setup>
+import { HEADER_HEIGHT, SECTION_SPACES, PROJECTS_SPACES } from '~/app/router.options';
+
 const NuxtLink = defineNuxtLink({ componentName: 'nuxt-link' });
 
 const links = [
@@ -7,13 +9,44 @@ const links = [
     { value: '#projects', label: 'projects' },
     { value: '#contact', label: 'contact' }
 ];
+
+const mainRef = inject('main-ref');
+
+const { y } = useWindowScroll();
+const { height } = useWindowSize();
+const activeLink = ref(null);
+
+watch(y, value => {
+    if(mainRef.value) {
+        const { height: mainHeight } = mainRef.value?.getBoundingClientRect();
+
+        if(y.value + height.value >= mainHeight) {
+            return activeLink.value = links.at(-1).value;
+        }
+    }
+    if(!y.value) {
+        return activeLink.value = links[0].value;
+    }
+    for(const link of links) {
+        const section = document.getElementById(link.label);
+
+        if(value >= section.offsetTop - (
+            link.value === '#projects'
+                ? HEADER_HEIGHT + PROJECTS_SPACES
+                : HEADER_HEIGHT + SECTION_SPACES
+            ) && value < section.offsetTop + section.scrollHeight
+        ) {
+            activeLink.value = link.value;
+        }
+    }
+}, { immediate: true });
 </script>
 
 <template>
     <Teleport to='body'>
         <div :class='$style.header'>
             <Container is='nav' :class='$style.nav'>
-                <NuxtLink :class='$style.logo' :to='{ path: `/` }'>
+                <NuxtLink :class='$style.logo' :to='{ params: { scroll: true } }'>
                     <SvgoLogo />
                 </NuxtLink>
                 <ul :class='$style[`nav-links`]'>
@@ -21,13 +54,16 @@ const links = [
                         <Typography
                             variant='link'
                             :is=NuxtLink
-                            :class='[$style.link, { "link-active": $route.hash === link.value }]'
-                            :to='{ path: `/`, hash: link.value }'
+                            :class='[$style.link, { "link-active": link.value === activeLink }]'
+                            :to='{ hash: link.value, params: { scroll: true } }'
                         >
                             {{ link.label }}
                         </Typography>
                     </li>
                 </ul>
+                <button>
+                    <Icon name='gg:menu-right-alt' size='2rem' />
+                </button>
             </Container>
         </div>
     </Teleport>
@@ -67,6 +103,10 @@ const links = [
 
             .link {
                 text-transform: capitalize;
+            }
+
+            @media (max-width: $xl) {
+                display: none;
             }
         }
     }

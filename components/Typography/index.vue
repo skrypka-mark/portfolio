@@ -1,6 +1,10 @@
 <script setup>
+import { breakpointsTailwind } from '@vueuse/core';
 
 const props = defineProps({ variant: String, is: [Object, String] });
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const isMobile = breakpoints.smaller('lg');
 
 const variantMapping = {
     h1: 'h1',
@@ -17,8 +21,8 @@ const Component = props.is ?? variantMapping[props.variant] ?? 'span';
 </script>
 
 <template>
-    <component :is=Component :class='{ [$style[variant]]: !!variant }'>
-        <slot :class='{ [$style[variant]]: !!variant }' />
+    <component :is=Component :class='{ [$style[variant]]: !!variant, [$style.mobile]: isMobile }'>
+        <slot />
     </component>
 </template>
 

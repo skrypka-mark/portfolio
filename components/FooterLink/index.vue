@@ -6,12 +6,14 @@ defineProps({ iconName: String, name: String, link: String });
     <article :class='$style[`footer-link`]'>
         <Icon :name=iconName size='2rem' color='var(--color-main)' />
         <div class='flex flex-col gap-y-1.5'>
-            <Typography variant='h3' class='capitalize'>
-                {{ name }}
-            </Typography>
-            <Typography variant='body'>
-                {{ link }}
-            </Typography>
+            <a :href=link target='_blank'>
+                <Typography variant='h3' class='capitalize'>
+                    {{ name }}
+                </Typography>
+                <Typography variant='body'>
+                    {{ link }}
+                </Typography>
+            </a>
         </div>
     </article>
 </template>

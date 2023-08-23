@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
     <div :class='$style[`hero-image`]' />
 </template>
@@ -17,6 +15,10 @@
     background-size: cover;
 
     animation: morph 10s ease-in-out infinite;
+
+    @media (max-width: $xl) {
+        height: 60vh;
+    }
 }
 
 @keyframes morph {

@@ -1,1 +1,9 @@
+.anchor {
+    color: var(--color-font-main);
+    transition: $transition-sm;
 
+    &:hover,
+    &.link-active {
+        color: var(--color-main);
+    }
+}

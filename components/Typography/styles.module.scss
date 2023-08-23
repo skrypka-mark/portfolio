@@ -7,6 +7,12 @@
     letter-spacing: 3.84px;
 
     color: var(--color-font-main);
+
+    &.mobile {
+        font-size: 3rem;
+        line-height: 3rem;
+        letter-spacing: 0.15rem;
+    }
 }
 .h2 {
     font-family: 'Montserrat-Bold';
@@ -16,6 +22,10 @@
     line-height: normal;
 
     color: var(--color-font-main);
+
+    &.mobile {
+        font-size: 1.125rem;
+    }
 }
 .h3 {
     font-family: 'Montserrat-Bold';
@@ -25,6 +35,10 @@
     line-height: normal;
 
     color: var(--color-font-main);
+
+    &.mobile {
+        font-size: 0.875rem;
+    }
 }
 .h4 {
     font-family: 'Montserrat-Bold';
@@ -35,6 +49,10 @@
     letter-spacing: 0.77px;
 
     color: var(--color-font-main);
+
+    &.mobile {
+        font-size: 0.75rem;
+    }
 }
 .body {
     font-family: 'Mulish';
@@ -43,7 +61,13 @@
     line-height: normal;
     letter-spacing: 0.72px;
 
+    white-space: break-spaces;
+
     color: var(--color-font-body);
+
+    &.mobile {
+        font-size: 0.75rem;
+    }
 }
 .button {
     font-family: 'Montserrat-Medium';
@@ -54,6 +78,10 @@
     letter-spacing: 0.77px;
 
     color: var(--color-font-main);
+
+    &.mobile {
+        font-size: 0.875rem;
+    }
 }
 .caption {
     font-family: 'Montserrat-Bold';
@@ -64,6 +92,10 @@
 
     text-transform: uppercase;
     color: var(--color-main);
+
+    &.mobile {
+        font-size: 0.875rem;
+    }
 }
 .link {
     font-family: 'Montserrat-Bold';
@@ -71,4 +103,10 @@
     font-weight: 700;
     font-style: normal;
     line-height: normal;
+
+    @extend .anchor !optional;
+
+    &.mobile {
+        font-size: 1.125rem;
+    }
 }

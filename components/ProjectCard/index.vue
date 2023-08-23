@@ -12,8 +12,10 @@ defineProps({
 const projectImageRef = ref(null);
 const imageRef = ref(null);
 const projectImageSpecs = ref(null);
+
 const isProjectImageModalShown = ref(false);
 const isProjectImageVisible = ref(false);
+const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 100 });
 const timeout = ref(null);
 // const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 1000 });
 
@@ -35,22 +37,22 @@ const toggleProjectImageVisibility = value => {
 //     projectImageSpecs.value = { width, height, top, left, borderRadius };
 // });
 
-const projectImageMouseOver = () => {
-    clearTimeout(timeout.value);
-    if(!projectImageRef.value.$el && !imageRef.value.$el) return;
+// const projectImageMouseOver = () => {
+//     clearTimeout(timeout.value);
+//     if(!projectImageRef.value.$el && !imageRef.value.$el) return;
 
-    timeout.value = setTimeout(() => {
-        const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
-        const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
-        const { transform } = getComputedStyle(projectImageRef.value.$el.children[0]);
+//     timeout.value = setTimeout(() => {
+//         const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
+//         const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
+//         const { transform } = getComputedStyle(projectImageRef.value.$el.children[0]);
 
-        projectImageSpecs.value = { width, height, top, left, borderRadius, transform };
-        isProjectImageModalShown.value = true;
-    }, 1500);
-};
-const projectImageMouseOut = () => {
-    clearTimeout(timeout.value);
-};
+//         projectImageSpecs.value = { width, height, top, left, borderRadius, transform };
+//         isProjectImageModalShown.value = true;
+//     }, 1500);
+// };
+// const projectImageMouseOut = () => {
+//     clearTimeout(timeout.value);
+// };
 const projectImageClick = () => {
     clearTimeout(timeout.value);
     if(!projectImageRef.value.$el && !imageRef.value.$el) return;
@@ -78,12 +80,11 @@ const projectImageClick = () => {
         <ProjectCardImage
             :image=image
             :visible=!isProjectImageVisible
-            @mouseover=projectImageMouseOver
-            @mouseout=projectImageMouseOut
+            :hovered=isProjectImageHovered
             @click=projectImageClick
             ref=projectImageRef
         />
-        <div class='flex flex-col items-center px-[5.5rem]'>
+        <div class='flex flex-col items-center md:px-[5.5rem]'>
             <a :href=preview target='_blank'>
                 <Typography variant='h3' class='mb-4 text-center'>
                     {{ name }}
@@ -124,23 +125,14 @@ const projectImageClick = () => {
     height: 24rem;
 
     background: var(--color-card-bg);
-    padding: $border-radius-sm;
+    padding: $spaces;
     box-shadow: $box-shadow-main;
     border-radius: $border-radius;
-    // overflow: hidden;
 
-    & > .project-card__image-container {
-        height: 100%;
-        aspect-ratio: 3.2 / 1;
-        border-radius: $border-radius-sm;
-        overflow: hidden;
-
-        & > .project-card__image {
-            width: 100%;
-            // height: auto;
-            box-shadow: $box-shadow-secondary;
-            cursor: pointer;
-        }
+    @media (max-width: $lg) {
+        flex-direction: column;
+        height: auto;
+        padding: calc($spaces / 2);
     }
 }
 </style>

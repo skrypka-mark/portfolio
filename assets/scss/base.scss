@@ -54,14 +54,16 @@ body {
     }
 }
 
+main {
+    container-type: inline-size;
+}
+
 a {
     text-decoration: none;
-    color: var(--color-font-main);
-    transition: $transition-sm;
+    @extend .anchor !optional;
 
-    &:hover,
-    &.link-active {
-        color: var(--color-main);
+    & > * {
+        @extend .anchor !optional;
     }
 }
 

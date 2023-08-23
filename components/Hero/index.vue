@@ -26,11 +26,17 @@ import Container from '~/components/Container';
 
     filter: blur(242px);
 }
+
 .hero {
     display: flex;
     align-items: center;
 
     height: 100vh;
+
+    @media (max-width: $xl) {
+        // height: 90vh;
+        padding-top: calc(var(--header-height) + 2rem);
+    }
 
     & > .wrapper {
         display: flex;
@@ -41,6 +47,13 @@ import Container from '~/components/Container';
 
         width: 100%;
         height: 387px;
+
+        @media (max-width: $xl) {
+            flex-direction: column;
+            row-gap: 2rem;
+
+            height: 100%;
+        }
     }
 }
 </style>

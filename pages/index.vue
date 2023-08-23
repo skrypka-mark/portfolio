@@ -1,9 +1,14 @@
 <script setup>
-const route = useRoute();
+const mainRef = ref(null);
+
+watchEffect(() => {
+  provide('main-ref', mainRef);
+});
 </script>
 
 <template>
-  <main :class='$style[`main-layout`]'>
+  <main :class='$style[`main-layout`]' ref=mainRef>
+    <Header />
     <Hero />
     <About />
     <Projects :class='$style[`projects-section`]' />
@@ -15,7 +20,6 @@ const route = useRoute();
 <style module lang='scss'>
 .main-layout {
   position: relative;
-  // margin-top: var(--header-height);
 }
 .projects-section {
   margin-top: calc($section-spaces * 2);

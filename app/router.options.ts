@@ -1,12 +1,16 @@
 import type { RouterConfig } from '@nuxt/schema';
 
-const HEADER_HEIGHT = 64;
-const SECTION_SPACES = 110;
-const PROJECTS_SPACES = 32;
+export const HEADER_HEIGHT = 64;
+export const SECTION_SPACES = 110;
+export const PROJECTS_SPACES = 32;
 
 // https://router.vuejs.org/api/interfaces/routeroptions.html
 export default <RouterConfig> {
     scrollBehavior: async (to, from, savedPosition) => {
+        const isScrollOn = JSON.parse(to.params.scroll as string ?? 'false');
+
+        // if(!isScrollOn) return {};
+
         if(savedPosition) {
             return await new Promise(resolve => {
                 setTimeout(() => {

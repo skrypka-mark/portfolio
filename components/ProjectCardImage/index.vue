@@ -1,16 +1,14 @@
 <script setup>
-defineProps({ image: String, visible: Boolean, imageRef: String });
+const props = defineProps({ image: String, visible: Boolean, hovered: Boolean, imageRef: String });
 defineEmits(['mouseover', 'mouseout']);
 </script>
 
 <template>
     <div
         :class='[$style[`project-card__image-container`], { [$style.hidden]: !visible }]'
-        @mouseover='$emit(`mouseover`)'
-        @mouseout='$emit(`mouseout`)'
         @click='$emit(`mouseover`)'
     >
-        <img :src=image :class='$style[`project-card__image`]' ref=imageRef />
+        <img :src=image :class='[$style[`project-card__image`], { [$style.hovered]: hovered }]' ref=imageRef />
     </div>
 </template>
 
@@ -23,6 +21,12 @@ defineEmits(['mouseover', 'mouseout']);
     cursor: pointer;
     overflow: hidden;
 
+    @media (max-width: $lg) {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1.6 / 1;
+    }
+
     &.hidden {
         opacity: 0;
     }
@@ -30,11 +34,11 @@ defineEmits(['mouseover', 'mouseout']);
         width: 100%;
         // height: auto;
 
-        transform: translateY(0px);
+        transform: translateY(0);
         transition: transform 2s ease-in-out;
 
-        &:hover {
-            --translate-y: calc(-100% + 90vh);
+        &.hovered {
+            --translate-y: calc(-100% + 24rem);
 
             transform: translateY(var(--translate-y));
             transition: transform 15s linear;

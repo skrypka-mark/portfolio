@@ -6,10 +6,13 @@
                 <div>
                     <Typography variant='caption'>About me</Typography>
                     <article :class='$style[`about-content`]'>
-                        <div class='relative inline-block self-start'>
-                            <Typography variant='h2'>Frontend Developer based in Ukraine</Typography>
-                            <Icon name='emojione-v1:flag-for-ukraine' size='30' class='absolute top-0 left-full ml-1.5' />
-                        </div>
+                        <Typography variant='h2'>
+                            Frontend Developer based in
+                            <div class='relative inline-block'>
+                                Ukraine
+                                <Icon name='emojione-v1:flag-for-ukraine' class='absolute top-0 left-full ml-1.5' :class='$style[`icon-ukraine`]' />
+                            </div>
+                        </Typography>
                         <Typography variant='body'>
                             As a Junior Front-End Developer, I possess an impressive arsenal of skills in HTML, CSS, JavaScript, React, Tailwind, and SCSS. I excel in designing and maintaining responsive websites that offer a smooth user experience. My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications.
                         </Typography>
@@ -42,17 +45,34 @@
         justify-content: space-between;
         column-gap: 8rem;
 
+        @media (max-width: $lg) {
+            flex-direction: column;
+            row-gap: 1rem;
+        }
+
         .about-content {
             display: flex;
             flex-direction: column;
             row-gap: 1rem;
 
             margin-top: $section-spaces;
+
+            @media (max-width: $lg) {
+                margin-top: 2rem;
+            }
+
+            .icon-ukraine {
+                font-size: 2rem;
+
+                @media (max-width: $lg) {
+                    font-size: 1.5rem;
+                }
+            }
         }
         & > .about-img {
             height: 100%;
             aspect-ratio: 1;
-            border-radius: $border-radius;
+            border-radius: $border-radius-sm;
         }
     }
 }
