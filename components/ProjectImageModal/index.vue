@@ -58,7 +58,7 @@ watch(() => props.imageVisible, value => {
                         ref=imageContainerRef
                         v-if=imageVisible
                     >
-                        <NuxtImg
+                        <img
                             :src=image
                             :class='[
                                 $style.image, {
@@ -68,6 +68,7 @@ watch(() => props.imageVisible, value => {
                                     [$style.unhovered]: !imageTransition && open && !imageContainerHovered
                                 }
                             ]'
+                            loading='lazy'
                             @transitionend=imageModalTransitionend
                         />
                     </div>

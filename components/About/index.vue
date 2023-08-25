@@ -21,7 +21,7 @@
                         </Typography>
                     </article>
                 </div>
-                <NuxtImg :class='$style[`about-img`]' src='/img/about.png' />
+                <img :class='$style[`about-img`]' src='/img/about.png' loading='lazy' />
             </Container>
         </div>
     </section>

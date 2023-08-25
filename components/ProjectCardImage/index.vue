@@ -8,7 +8,12 @@ defineEmits(['mouseover', 'mouseout']);
         :class='[$style[`project-card__image-container`], { [$style.hidden]: !visible }]'
         @click='$emit(`mouseover`)'
     >
-        <NuxtImg :src=image :class='[$style[`project-card__image`], { [$style.hovered]: hovered }]' ref=imageRef />
+        <img
+            :src=image
+            :class='[$style[`project-card__image`], { [$style.hovered]: hovered }]'
+            loading='lazy'
+            ref=imageRef
+        />
     </div>
 </template>
 
