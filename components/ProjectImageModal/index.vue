@@ -58,7 +58,7 @@ watch(() => props.imageVisible, value => {
                         ref=imageContainerRef
                         v-if=imageVisible
                     >
-                        <img
+                        <NuxtImg
                             :src=image
                             :class='[
                                 $style.image, {
@@ -231,7 +231,7 @@ watch(() => props.imageVisible, value => {
 
                 // border-radius: $border-radius;
                 border-radius: 0;
-                animation: scale-up-mobile $transition-lg;
+                animation: scale-up-mobile $transition-lg forwards;
             }
 
             // & > .image {
@@ -252,7 +252,7 @@ watch(() => props.imageVisible, value => {
             animation: scale-down $transition-lg;
 
             @media (max-width: $lg) {
-                animation: scale-down-mobile $transition-lg;
+                animation: scale-down-mobile $transition-lg forwards;
             }
 
             // & > .image {

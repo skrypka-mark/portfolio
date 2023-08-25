@@ -18,6 +18,7 @@
     --color-section-bg: rgba(249, 249, 249, .2);
 
     --header-height: 4rem;
+    --header-border-size: .5px;
 }
 
 @font-face {
@@ -60,6 +61,7 @@ main {
 
 a {
     text-decoration: none;
+    cursor: pointer;
     @extend .anchor !optional;
 
     & > * {

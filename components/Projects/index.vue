@@ -1,42 +1,5 @@
 <script setup>
-const projects = [
-    // {
-    //     name: 'MakerPlace',
-    //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    //     image: '/img/projects/maker-place.png',
-    //     preview: '#',
-    //     skills: ['nuxt', 'express', 'scss'],
-    //     github: '#',
-    //     figma: '#'
-    // },
-    {
-        name: 'Traveller',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        image: '/img/projects/traveller.jpg',
-        preview: '#',
-        skills: ['nuxt', 'express', 'scss'],
-        github: '#',
-        figma: '#'
-    },
-    {
-        name: 'Gymate',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        image: '/img/projects/gymate.jpg',
-        preview: '#',
-        skills: ['nuxt', 'express', 'scss'],
-        github: '#',
-        figma: '#'
-    },
-    // {
-    //     name: 'Creativecoder',
-    //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-    //     image: '/img/projects/creativecoder.png',
-    //     preview: '#',
-    //     skills: ['nuxt', 'express', 'scss'],
-    //     github: '#',
-    //     figma: '#'
-    // }
-];
+import { projects } from '~/constants';
 </script>
 
 <template>
@@ -46,7 +9,7 @@ const projects = [
             <SvgoEllipse4 :class='$style.ellipse2' />
             <SvgoEllipse5 :class='$style.ellipse3' />
             <Typography variant='caption'>My projects</Typography>
-            <ul class='flex flex-col gap-y-4 mt-8'>
+            <ul class='flex flex-col gap-y-4 mt-8 max-lg:items-center'>
                 <li :key=project.name v-for='project in projects'>
                     <ProjectCard v-bind=project />
                 </li>

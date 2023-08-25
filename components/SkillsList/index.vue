@@ -15,8 +15,9 @@ defineProps({ skills: Array });
 <style module lang='scss'>
 .skills-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    column-gap: 1rem;
+    gap: 1rem;
 
     list-style: none;
 

@@ -1,20 +1,21 @@
 <script setup>
+import { useMobile } from '~/composables/useMobile';
 import { HEADER_HEIGHT, SECTION_SPACES, PROJECTS_SPACES } from '~/app/router.options';
+import { links } from '~/constants';
 
 const NuxtLink = defineNuxtLink({ componentName: 'nuxt-link' });
-
-const links = [
-    { value: '', label: 'home' },
-    { value: '#about', label: 'about' },
-    { value: '#projects', label: 'projects' },
-    { value: '#contact', label: 'contact' }
-];
 
 const mainRef = inject('main-ref');
 
 const { y } = useWindowScroll();
 const { height } = useWindowSize();
+const isMobile = useMobile();
 const activeLink = ref(null);
+const isMobileMenuDrawerOpen = ref(false);
+
+const toggleMobileMenuDrawer = value => {
+    isMobileMenuDrawerOpen.value = typeof value === 'boolean' ? value : !isMobileMenuDrawerOpen.value;
+};
 
 watch(y, value => {
     if(mainRef.value) {
@@ -40,16 +41,24 @@ watch(y, value => {
         }
     }
 }, { immediate: true });
+
+watch(isMobileMenuDrawerOpen, value => {
+    document.body.classList[value ? 'add' : 'remove']('prevent-scroll');
+});
 </script>
 
 <template>
     <Teleport to='body'>
-        <div :class='$style.header'>
+        <header :class='$style.header'>
             <Container is='nav' :class='$style.nav'>
-                <NuxtLink :class='$style.logo' :to='{ params: { scroll: true } }'>
+                <NuxtLink
+                    :class='$style.logo'
+                    :to='{ params: { scroll: true } }'
+                    @click=toggleMobileMenuDrawer(false)
+                >
                     <SvgoLogo />
                 </NuxtLink>
-                <ul :class='$style[`nav-links`]'>
+                <ul :class='$style[`nav-links`]' v-if=!isMobile>
                     <li :key=link v-for='link in links'>
                         <Typography
                             variant='link'
@@ -61,11 +70,27 @@ watch(y, value => {
                         </Typography>
                     </li>
                 </ul>
-                <button>
-                    <Icon name='gg:menu-right-alt' size='2rem' />
+                <button class='perspective' v-if=isMobile>
+                    <Transition
+                        :name='isMobileMenuDrawerOpen ? `mobile-menu-btn-transition` : `mobile-menu-close-btn-transition`'
+                        mode='out-in'
+                    >
+                        <div :key=isMobileMenuDrawerOpen>
+                            <Icon
+                                :name='isMobileMenuDrawerOpen ? `mingcute:close-line` : `gg:menu-right-alt`'
+                                size='2rem'
+                                @click=toggleMobileMenuDrawer
+                            />
+                        </div>
+                    </Transition>
+                    <MobileMenuDrawer
+                        :open=isMobileMenuDrawerOpen
+                        :activeLink=activeLink
+                        @close=toggleMobileMenuDrawer(false)
+                    />
                 </button>
             </Container>
-        </div>
+        </header>
     </Teleport>
 </template>
 
@@ -77,8 +102,12 @@ watch(y, value => {
     width: 100%;
     height: var(--header-height);
 
-    background: rgba(231, 231, 231, .75);
-    backdrop-filter: blur(20px);
+    background: var(--color-main-bg);
+    backdrop-filter: $backdrop-filter;
+
+    @media (max-width: $lg) {
+        border: var(--header-border-size) solid rgba(45, 46, 50, .2);
+    }
 
     & > .nav {
         display: flex;
@@ -103,10 +132,6 @@ watch(y, value => {
 
             .link {
                 text-transform: capitalize;
-            }
-
-            @media (max-width: $xl) {
-                display: none;
             }
         }
     }

@@ -94,7 +94,7 @@ watch(() => route.query, query => {
             @click=projectImageClick(name)
             ref=projectImageRef
         />
-        <div class='flex flex-col items-center md:px-[5.5rem]'>
+        <div class='flex flex-col items-center md:px-[5.5rem] max-lg:py-6'>
             <a :href=preview target='_blank'>
                 <Typography variant='h3' class='mb-4 text-center'>
                     {{ name }}
@@ -141,7 +141,9 @@ watch(() => route.query, query => {
 
     @media (max-width: $lg) {
         flex-direction: column;
+        // row-gap: 1.5rem;
         height: auto;
+        max-width: 35rem;
         padding: calc($spaces / 2);
     }
 }

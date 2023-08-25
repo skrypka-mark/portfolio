@@ -7,3 +7,60 @@
         color: var(--color-main);
     }
 }
+
+.perspective {
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+}
+
+// Transitions
+
+.drawer-transition {
+    &-enter-active,
+    &-leave-active {
+        transition: all $transition;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        filter: blur(12px);
+        transform: translateX(100%);
+    }
+}
+.mobile-menu-btn-transition {
+    &-enter-active,
+    &-leave-active {
+        transition: all $transition-sm;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+    }
+
+    &-enter-from {
+        transform: translateX(-25%) scale(.9);
+    }
+    &-leave-to {
+        transform: translateX(25%) scale(.9);
+    }
+}
+.mobile-menu-close-btn-transition {
+    &-enter-active,
+    &-leave-active {
+        transition: all $transition-sm;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+    }
+
+    &-enter-from {
+        transform: translateX(25%) scale(.9);
+    }
+    &-leave-to {
+        transform: translateX(-25%) scale(.9);
+    }
+}

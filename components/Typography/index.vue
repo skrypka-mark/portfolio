@@ -1,10 +1,9 @@
 <script setup>
-import { breakpointsTailwind } from '@vueuse/core';
+import { useMobile } from '~/composables/useMobile';
 
 const props = defineProps({ variant: String, is: [Object, String] });
 
-const breakpoints = useBreakpoints(breakpointsTailwind);
-const isMobile = breakpoints.smaller('lg');
+const isMobile = useMobile();
 
 const variantMapping = {
     h1: 'h1',

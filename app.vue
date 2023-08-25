@@ -1,13 +1,11 @@
 <script setup>
-import { breakpointsTailwind } from '@vueuse/core';
-
-const breakpoints = useBreakpoints(breakpointsTailwind);
-
-console.log('====================================');
-console.log(breakpointsTailwind);
-console.log('====================================');
+const preferredDark = usePreferredDark();
 </script>
 
 <template>
+  <Head>
+    <Title>Mark Skrypka | Frontend Developer</Title>
+    <Link rel='icon' type='image/x-icon' :href='preferredDark ? `/favicon-light.ico` : `/favicon.ico`' />
+  </Head>
   <NuxtPage />
 </template>

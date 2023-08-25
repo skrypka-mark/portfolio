@@ -7,12 +7,13 @@ watchEffect(() => {
 </script>
 
 <template>
+  <Header />
   <main :class='$style[`main-layout`]' ref=mainRef>
-    <Header />
     <Hero />
     <About />
     <Projects :class='$style[`projects-section`]' />
     <Footer />
+
     <div :class='$style[`darken-overlay`]' />
   </main>
 </template>
@@ -24,6 +25,11 @@ watchEffect(() => {
 .projects-section {
   margin-top: calc($section-spaces * 2);
   margin-bottom: $section-spaces;
+
+  @media (max-width: $lg) {
+    margin-top: $section-spaces;
+    margin-bottom: calc($section-spaces / 2);
+  }
 }
 .darken-overlay {
   position: absolute;

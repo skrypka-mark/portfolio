@@ -4,6 +4,7 @@
 
 <style module lang='scss'>
 .hero-image {
+    max-width: 100%;
     height: 100%;
     aspect-ratio: 1;
 
@@ -17,7 +18,7 @@
     animation: morph 10s ease-in-out infinite;
 
     @media (max-width: $xl) {
-        height: 60vh;
+        height: 50vh;
     }
 }
 
