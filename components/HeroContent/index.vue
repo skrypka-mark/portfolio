@@ -14,7 +14,7 @@ const skills = [
         <div :class='$style.heading'>
             <Typography variant='h1' :class='$style.title'>Frontend Developer</Typography>
             <Typography variant='body' :class='$style.body'>
-                Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine. Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine.
+                Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine.
             </Typography>
         </div>
         <div :class='$style[`socials-group`]' class='max-xl:justify-center'>

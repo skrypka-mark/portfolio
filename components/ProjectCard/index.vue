@@ -94,13 +94,13 @@ watch(() => route.query, query => {
             @click=projectImageClick(name)
             ref=projectImageRef
         />
-        <div class='flex flex-col items-center md:px-[5.5rem] max-lg:py-6'>
+        <div class='flex flex-col items-center px-[5.5rem] max-lg:px-6 max-lg:py-6 max-w-prose'>
             <a :href=preview target='_blank'>
                 <Typography variant='h3' class='mb-4 text-center'>
                     {{ name }}
                 </Typography>
             </a>
-            <Typography variant='body' class='mb-8 text-center'>
+            <Typography variant='body' class='mb-8 text-center '>
                 {{ description }}
             </Typography>
             <SkillsList :skills=skills class='mb-12' />
