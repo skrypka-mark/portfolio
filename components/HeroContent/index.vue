@@ -2,10 +2,12 @@
 import Link from '~/components/Link';
 
 const skills = [
-    'vue',
     'react',
+    'react native',
+    'vue',
     'nuxt',
-    'next'
+    'next',
+    'express'
 ];
 </script>
 

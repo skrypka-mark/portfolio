@@ -3,7 +3,8 @@ defineProps({ skill: String });
 
 const skillIconsMapping = {
     vue: 'devicon:vuejs',
-    react: 'vscode-icons:file-type-reactjs',
+    react: 'vscode-icons:file-type-reactts',
+    'react native': 'vscode-icons:file-type-reactjs',
     nuxt: 'skill-icons:nuxtjs-dark',
     next: 'teenyicons:nextjs-outline',
     node: 'devicon:nodejs',
