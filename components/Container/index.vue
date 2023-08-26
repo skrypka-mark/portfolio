@@ -1,5 +1,12 @@
-<script setup>
-defineProps({ is: { type: String, default: 'div' } });
+<script setup lang='ts'>
+interface IContainerProps {
+    is: string;
+}
+
+withDefaults(
+    defineProps<IContainerProps>(),
+    { is: 'div' }
+);
 </script>
 
 <template>

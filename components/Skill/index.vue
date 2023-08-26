@@ -1,22 +1,16 @@
-<script setup>
-defineProps({ skill: String });
+<script setup lang='ts'>
+import { SkillIconsMapping } from '~/enums/SkillIconsMapping';
 
-const skillIconsMapping = {
-    vue: 'devicon:vuejs',
-    react: 'vscode-icons:file-type-reactts',
-    'react native': 'vscode-icons:file-type-reactjs',
-    nuxt: 'skill-icons:nuxtjs-dark',
-    next: 'teenyicons:nextjs-outline',
-    node: 'devicon:nodejs',
-    express: 'skill-icons:expressjs-dark',
-    figma: 'devicon:figma',
-    scss: 'devicon:sass'
-};
+interface ISkillProps {
+    skill: keyof typeof SkillIconsMapping;
+}
+
+defineProps<ISkillProps>();
 </script>
 
 <template>
     <div :class='$style.skill'>
-        <Icon :name=skillIconsMapping[skill] size='1.5rem' />
+        <Icon :name=SkillIconsMapping[skill] size='1.5rem' />
         <Typography variant='h4' :class='$style[`skill-name`]'>
             {{ skill }}
         </Typography>

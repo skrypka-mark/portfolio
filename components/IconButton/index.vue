@@ -1,5 +1,9 @@
-<script setup>
-defineProps({ iconName: String });
+<script setup lang='ts'>
+interface IIconButtonProps {
+    iconName: string;
+}
+
+defineProps<IIconButtonProps>();
 </script>
 
 <template>

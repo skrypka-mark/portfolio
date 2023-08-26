@@ -1,5 +1,11 @@
-<script setup>
-defineProps({ skills: Array });
+<script setup lang='ts'>
+import { SkillIconsMapping } from '~/enums/SkillIconsMapping';
+
+interface ISkillsListProps {
+    skills: (keyof typeof SkillIconsMapping)[];
+}
+
+defineProps<ISkillsListProps>();
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import { links } from '~/constants';
 
 defineProps({ open: Boolean, activeLink: String });

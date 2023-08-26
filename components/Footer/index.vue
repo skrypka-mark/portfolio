@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang='ts'>
 const contactLinks = [
-    { iconName: 'maki:post', name: 'email', link: 'mark.skrypka@gmail.com' },
-    { iconName: 'mdi:linkedin', name: 'linkedin', link: 'https://linkedin.profile.com' },
-    { iconName: 'mdi:github', name: 'gitHub', link: 'https://github.mark.skrypka.com' }
+    { iconName: 'maki:post', name: 'email', description: 'mark.skrypka@gmail.com', link: 'mailto:mark.skrypka@gmail.com' },
+    { iconName: 'mdi:linkedin', name: 'linkedin', description: 'www.linkedin.com/in/mark-skrypka', link: 'https://www.linkedin.com/in/mark-skrypka' },
+    { iconName: 'mdi:github', name: 'gitHub', description: 'github.com/skrypka-mark', link: 'https://github.com/skrypka-mark' }
 ];
 </script>
 

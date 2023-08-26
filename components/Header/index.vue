@@ -1,28 +1,28 @@
-<script setup>
+<script setup lang='ts'>
 import { useMobile } from '~/composables/useMobile';
 import { HEADER_HEIGHT, SECTION_SPACES, PROJECTS_SPACES } from '~/app/router.options';
 import { links } from '~/constants';
 
 const NuxtLink = defineNuxtLink({ componentName: 'nuxt-link' });
 
-const mainRef = inject('main-ref');
+const mainRef = inject<Ref>('main-ref');
 
 const { y } = useWindowScroll();
 const { height } = useWindowSize();
-const isMobile = useMobile();
-const activeLink = ref(null);
+const isMobile = useMobile() as Ref<boolean>;
+const activeLink = ref<string | null>(null);
 const isMobileMenuDrawerOpen = ref(false);
 
-const toggleMobileMenuDrawer = value => {
+const toggleMobileMenuDrawer = (value: boolean) => {
     isMobileMenuDrawerOpen.value = typeof value === 'boolean' ? value : !isMobileMenuDrawerOpen.value;
 };
 
 watch(y, value => {
-    if(mainRef.value) {
+    if(mainRef?.value) {
         const { height: mainHeight } = mainRef.value?.getBoundingClientRect();
 
         if(y.value + height.value >= mainHeight) {
-            return activeLink.value = links.at(-1).value;
+            return activeLink.value = links.at(-1)?.value ?? null;
         }
     }
     if(!y.value) {
@@ -30,6 +30,8 @@ watch(y, value => {
     }
     for(const link of links) {
         const section = document.getElementById(link.label);
+
+        if(!section) return;
 
         if(value >= section.offsetTop - (
             link.value === '#projects'
@@ -53,13 +55,13 @@ watch(isMobileMenuDrawerOpen, value => {
             <Container is='nav' :class='$style.nav'>
                 <NuxtLink
                     :class='$style.logo'
-                    :to='{ params: { scroll: true } }'
+                    :to='{ params: { scroll: 1 } }'
                     @click=toggleMobileMenuDrawer(false)
                 >
                     <SvgoLogo />
                 </NuxtLink>
                 <ul :class='$style[`nav-links`]' v-if=!isMobile>
-                    <li :key=link v-for='link in links'>
+                    <li :key=link.value v-for='link in links'>
                         <Typography
                             variant='link'
                             :is=NuxtLink
@@ -75,7 +77,7 @@ watch(isMobileMenuDrawerOpen, value => {
                         :name='isMobileMenuDrawerOpen ? `mobile-menu-btn-transition` : `mobile-menu-close-btn-transition`'
                         mode='out-in'
                     >
-                        <div :key=isMobileMenuDrawerOpen>
+                        <div :key=String(isMobileMenuDrawerOpen)>
                             <Icon
                                 :name='isMobileMenuDrawerOpen ? `mingcute:close-line` : `gg:menu-right-alt`'
                                 size='2rem'

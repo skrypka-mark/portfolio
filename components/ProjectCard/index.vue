@@ -1,68 +1,42 @@
-<script setup>
-const props = defineProps({
-    name: String,
-    description: String,
-    image: String,
-    preview: String,
-    skills: Array,
-    github: String,
-    figma: String
-});
+<script setup lang='ts'>
+import type { ImageSpecsType } from '~/types/ImageSpecsType';
+import { SkillIconsMapping } from '~/enums/SkillIconsMapping';
+
+interface IProjectCardProps {
+    name: string;
+    description: string;
+    image: string;
+    preview: string;
+    skills: (keyof typeof SkillIconsMapping)[];
+    github: string;
+    figma: string;
+}
+
+const props = defineProps<IProjectCardProps>();
 
 const route = useRoute();
 
-const projectImageRef = ref(null);
-const imageRef = ref(null);
-const projectImageSpecs = ref(null);
+const projectImageRef = ref<null | Ref | { $el: HTMLElement }>(null);
+const imageRef = ref<null | { $el: HTMLElement }>(null);
+const projectImageSpecs = ref<ImageSpecsType | null>(null);
 
 const isProjectImageModalShown = ref(false);
 const isProjectImageVisible = ref(false);
 const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 100 });
-// const timeout = ref(null);
-// const isProjectImageHovered = useElementHover(projectImageRef, { delayEnter: 1000 });
 
 const closeProjectImageModal = () => {
-    // isProjectImageModalShown.value = false;
-    const query = Object({}, route.query);
+    const query = Object.assign({}, route.query);
     delete query.image;
-    navigateTo({ hash: route.hash, query, params: { scroll: false } });
+    navigateTo({ hash: route.hash, query, params: { scroll: 0 } });
 };
-const toggleProjectImageVisibility = value => {
+const toggleProjectImageVisibility = (value: boolean) => {
     isProjectImageVisible.value = typeof value === 'boolean' ? value : !isProjectImageVisible.value;
 };
 
-// watch(isProjectImageHovered, val => {
-//     if(!projectImageRef.value && !val) return;
+const projectImageClick = (name: string) => {
+    navigateTo({ hash: route.hash, query: { image: name?.toLowerCase() }, params: { scroll: 0 } });
 
-//     isProjectImageModalShown.value = true;
-
-//     const { width, height, top, left } = projectImageRef.value.getBoundingClientRect();
-//     const { borderRadius } = getComputedStyle(projectImageRef.value);
-
-//     projectImageSpecs.value = { width, height, top, left, borderRadius };
-// });
-
-// const projectImageMouseOver = () => {
-//     clearTimeout(timeout.value);
-//     if(!projectImageRef.value.$el && !imageRef.value.$el) return;
-
-//     timeout.value = setTimeout(() => {
-//         const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
-//         const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
-//         const { transform } = getComputedStyle(projectImageRef.value.$el.children[0]);
-
-//         projectImageSpecs.value = { width, height, top, left, borderRadius, transform };
-//         isProjectImageModalShown.value = true;
-//     }, 1500);
-// };
-// const projectImageMouseOut = () => {
-//     clearTimeout(timeout.value);
-// };
-const projectImageClick = name => {
-    navigateTo({ hash: route.hash, query: { image: name?.toLowerCase() }, params: { scroll: false } });
-
-    // clearTimeout(timeout.value);
-    if(!projectImageRef.value.$el && !imageRef.value.$el) return;
+    if(!projectImageRef.value?.$el && !imageRef.value?.$el) return;
 
     const { width, height, top, left } = projectImageRef.value.$el.getBoundingClientRect();
     const { borderRadius } = getComputedStyle(projectImageRef.value.$el);
@@ -78,15 +52,6 @@ watch(() => route.query, query => {
 
 <template>
     <article :class='$style[`project-card`]'>
-        <!-- <div :class='$style[`project-card__image-container`]' ref=projectImageRef>
-            <img
-                :src=image
-                :class='$style[`project-card__image`]'
-                @mouseover=projectImageMouseOver
-                @mouseout=projectImageMouseOut
-                v-if=!isProjectImageVisible
-            />
-        </div> -->
         <ProjectCardImage
             :image=image
             :visible=!isProjectImageVisible
@@ -141,7 +106,6 @@ watch(() => route.query, query => {
 
     @media (max-width: $lg) {
         flex-direction: column;
-        // row-gap: 1.5rem;
         height: auto;
         max-width: 35rem;
         padding: calc($spaces / 2);

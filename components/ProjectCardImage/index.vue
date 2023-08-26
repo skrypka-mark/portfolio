@@ -1,18 +1,23 @@
-<script setup>
-const props = defineProps({ image: String, visible: Boolean, hovered: Boolean, imageRef: String });
-defineEmits(['mouseover', 'mouseout']);
+<script setup lang='ts'>
+interface IProjectCardImageProps {
+    image: string;
+    visible: boolean;
+    hovered: boolean;
+}
+
+defineProps<IProjectCardImageProps>();
+defineEmits<{ (event: 'click'): void; }>();
 </script>
 
 <template>
     <div
         :class='[$style[`project-card__image-container`], { [$style.hidden]: !visible }]'
-        @click='$emit(`mouseover`)'
+        @click='$emit(`click`)'
     >
         <img
             :src=image
             :class='[$style[`project-card__image`], { [$style.hovered]: hovered }]'
             loading='lazy'
-            ref=imageRef
         />
     </div>
 </template>
@@ -37,17 +42,9 @@ defineEmits(['mouseover', 'mouseout']);
     }
     & > .project-card__image {
         width: 100%;
-        // height: auto;
 
         transform: translateY(0);
         transition: transform 2s ease-in-out;
-
-        // &.hovered {
-        //     --translate-y: calc(-100% + 24rem);
-
-        //     transform: translateY(var(--translate-y));
-        //     transition: transform 15s linear;
-        // }
     }
 }
 </style>

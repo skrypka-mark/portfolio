@@ -3,7 +3,7 @@ import { projects } from '~/constants';
 </script>
 
 <template>
-    <section id='projects' :class='$style.projects'>
+    <section id='projects'>
         <Container>
             <SvgoEllipse3 :class='$style.ellipse1' />
             <SvgoEllipse4 :class='$style.ellipse2' />
@@ -52,5 +52,4 @@ import { projects } from '~/constants';
 
     filter: blur(227px);
 }
-.projects {}
 </style>

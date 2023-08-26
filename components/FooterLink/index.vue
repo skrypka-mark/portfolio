@@ -1,5 +1,12 @@
-<script setup>
-defineProps({ iconName: String, name: String, link: String });
+<script setup lang='ts'>
+interface IFooterLinkProps {
+    iconName: string;
+    name: string;
+    description: string;
+    link: string;
+}
+
+defineProps<IFooterLinkProps>();
 </script>
 
 <template>
@@ -11,7 +18,7 @@ defineProps({ iconName: String, name: String, link: String });
                     {{ name }}
                 </Typography>
                 <Typography variant='body'>
-                    {{ link }}
+                    {{ description }}
                 </Typography>
             </a>
         </div>

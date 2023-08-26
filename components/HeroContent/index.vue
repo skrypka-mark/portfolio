@@ -48,12 +48,6 @@ const skills = [
 
     height: 80%;
 
-    @media (max-width: $lg) {
-        // justify-content: space-around;
-        // row-gap: auto;
-        // height: 100%;
-    }
-
     & > .heading {
         display: flex;
         flex-direction: column;
@@ -68,8 +62,6 @@ const skills = [
 
         .title {
             text-transform: uppercase;
-
-            // width: min-content;
         }
     }
     & > .socials-group {
