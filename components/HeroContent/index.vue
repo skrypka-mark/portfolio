@@ -18,19 +18,19 @@ const skills = [
             </Typography>
         </div>
         <div :class='$style[`socials-group`]' class='max-xl:justify-center'>
-            <a href='https://www.linkedin.com/in/mark-skrypka-a19b051bb' target='_blank'>
+            <a href='https://www.linkedin.com/in/mark-skrypka' target='_blank'>
                 <Icon name='mdi:linkedin' size='2rem' />
             </a>
             <a href='https://github.com/skrypka-mark' target='_blank'>
                 <Icon name='mdi:github' size='2rem' />
             </a>
-            <a href='https://www.upwork.com/freelancers/~0170e4ec789ff7ddfc' target='_blank'>
+            <a href='https://www.upwork.com/freelancers/markskrypka' target='_blank'>
                 <Icon name='cib:upwork' size='2rem' />
             </a>
         </div>
         <SkillsList :skills=skills :class='$style[`skills-group`]' class='max-xl:justify-center'>
             <template #additional>
-                <Link href='https://figma.com/' target='_blank'>
+                <Link href='https://www.figma.com/file/GLEk3wywgKUrzIUcSYbERS/Portfolio' target='_blank'>
                     <Skill skill='figma' />
                 </Link>
             </template>
