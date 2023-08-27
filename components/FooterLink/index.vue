@@ -25,10 +25,4 @@ defineProps<IFooterLinkProps>();
     </article>
 </template>
 
-<style module lang='scss'>
-.footer-link {
-    display: flex;
-    column-gap: 1rem;
-    align-items: flex-start;
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

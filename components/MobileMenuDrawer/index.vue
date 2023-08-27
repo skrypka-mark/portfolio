@@ -1,14 +1,17 @@
 <script setup lang='ts'>
 import { links } from '~/constants';
 
-defineProps({ open: Boolean, activeLink: String });
+interface IMobileMenuDrawerProps {
+    open: boolean;
+    activeLink: string | null;
+}
+
+defineProps<IMobileMenuDrawerProps>();
 const emits = defineEmits(['close']);
 
-const NuxtLink = defineNuxtLink({ componentName: 'nuxt-link' });
-
-const linkClickHandler = hash => {
+const linkClickHandler = (hash: string) => {
     emits('close');
-    navigateTo({ hash, params: { scroll: true } });
+    navigateTo({ hash, params: { scroll: 1 } });
 };
 </script>
 
@@ -21,7 +24,7 @@ const linkClickHandler = hash => {
                 v-if=open
             >
                 <ul class='flex flex-col items-center justify-center gap-y-10'>
-                    <li :key=link v-for='link in links'>
+                    <li :key=link.value v-for='link in links'>
                         <Typography
                             variant='link'
                             class='capitalize'

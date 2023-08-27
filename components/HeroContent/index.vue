@@ -1,22 +1,21 @@
-<script setup>
-import Link from '~/components/Link';
+<script setup lang='ts'>
+interface IHeroContentProps {
+    title: string;
+    description: string;
+    skills: string[];
+}
 
-const skills = [
-    'react',
-    'react native',
-    'vue',
-    'nuxt',
-    'next',
-    'express'
-];
+defineProps<IHeroContentProps>();
 </script>
 
 <template>
     <div :class='$style[`hero-content`]'>
         <div :class='$style.heading'>
-            <Typography variant='h1' :class='$style.title'>Frontend Developer</Typography>
+            <Typography variant='h1' :class='$style.title'>
+                {{ title }}
+            </Typography>
             <Typography variant='body' :class='$style.body'>
-                Hi, I'm Mark Skrypka. A passionate Frontend Developer based in Ukraine.
+                {{ description }}
             </Typography>
         </div>
         <div :class='$style[`socials-group`]' class='max-xl:justify-center'>
@@ -32,48 +31,12 @@ const skills = [
         </div>
         <SkillsList :skills=skills :class='$style[`skills-group`]' class='max-xl:justify-center'>
             <template #additional>
-                <Link href='https://www.figma.com/file/GLEk3wywgKUrzIUcSYbERS/Portfolio' target='_blank'>
+                <UiLink href='https://www.figma.com/file/GLEk3wywgKUrzIUcSYbERS/Portfolio' target='_blank'>
                     <Skill skill='figma' />
-                </Link>
+                </UiLink>
             </template>
         </SkillsList>
     </div>
 </template>
 
-<style module lang='scss'>
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
-
-    height: 80%;
-
-    & > .heading {
-        display: flex;
-        flex-direction: column;
-        row-gap: 15px;
-
-        & > .title,
-        & > .body {
-            @media (max-width: $xl) {
-                text-align: center;
-            }
-        }
-
-        .title {
-            text-transform: uppercase;
-        }
-    }
-    & > .socials-group {
-        display: flex;
-        column-gap: 10px;
-    }
-    & > .skills-group {
-        margin-top: auto;
-
-        @media (max-width: $xl) {
-            margin-top: 2rem;
-        }
-    }
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

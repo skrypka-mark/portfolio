@@ -1,8 +1,8 @@
 <script setup lang='ts'>
-import { SkillIconsMapping } from '~/enums/SkillIconsMapping';
+import { SkillIconsMapping } from '~/enums/SkillsMapping';
 
 interface ISkillsListProps {
-    skills: (keyof typeof SkillIconsMapping)[];
+    skills: (keyof typeof SkillIconsMapping)[] | string[];
 }
 
 defineProps<ISkillsListProps>();

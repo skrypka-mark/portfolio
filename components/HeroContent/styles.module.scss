@@ -1,0 +1,35 @@
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    height: 80%;
+
+    & > .heading {
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+
+        & > .title,
+        & > .body {
+            @media (max-width: $xl) {
+                text-align: center;
+            }
+        }
+
+        .title {
+            text-transform: uppercase;
+        }
+    }
+    & > .socials-group {
+        display: flex;
+        column-gap: 10px;
+    }
+    & > .skills-group {
+        margin-top: auto;
+
+        @media (max-width: $xl) {
+            margin-top: 2rem;
+        }
+    }
+}

@@ -1,5 +1,10 @@
 <script setup>
 const preferredDark = usePreferredDark();
+const route = useRoute();
+
+const profile = computed(() => route.query?.profile);
+
+provide('profile-query', profile);
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { SkillIconsMapping } from '~/enums/SkillIconsMapping';
+import { SkillIconsMapping, SkillNamesMapping } from '~/enums/SkillsMapping';
 
 interface ISkillProps {
     skill: keyof typeof SkillIconsMapping;
@@ -12,7 +12,7 @@ defineProps<ISkillProps>();
     <div :class='$style.skill'>
         <Icon :name=SkillIconsMapping[skill] size='1.5rem' />
         <Typography variant='h4' :class='$style[`skill-name`]'>
-            {{ skill }}
+            {{ SkillNamesMapping?.[skill as keyof typeof SkillNamesMapping] ?? skill }}
         </Typography>
     </div>
 </template>

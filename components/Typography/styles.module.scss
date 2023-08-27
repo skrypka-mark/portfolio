@@ -11,7 +11,7 @@
     &.mobile {
         font-size: 3rem;
         line-height: 3rem;
-        letter-spacing: 0.15rem;
+        letter-spacing: .15rem;
     }
 }
 .h2 {
@@ -37,7 +37,7 @@
     color: var(--color-font-main);
 
     &.mobile {
-        font-size: 0.875rem;
+        font-size: .875rem;
     }
 }
 .h4 {
@@ -46,18 +46,19 @@
     font-weight: 700;
     font-style: normal;
     line-height: normal;
-    letter-spacing: 0.77px;
+    letter-spacing: .77px;
 
     color: var(--color-font-main);
 
     &.mobile {
-        font-size: 0.75rem;
+        font-size: .75rem;
     }
 }
 .body {
     font-family: 'Mulish';
     font-size: 1rem;
     font-weight: 600;
+    font-style: normal;
     line-height: normal;
     letter-spacing: 0.72px;
 
@@ -66,7 +67,9 @@
     color: var(--color-font-body);
 
     &.mobile {
-        font-size: 0.75rem;
+        font-size: .875rem;
+        font-weight: 500;
+        letter-spacing: .03375rem;
     }
 }
 .button {
@@ -80,7 +83,7 @@
     color: var(--color-font-main);
 
     &.mobile {
-        font-size: 0.875rem;
+        font-size: .875rem;
     }
 }
 .caption {
@@ -94,7 +97,7 @@
     color: var(--color-main);
 
     &.mobile {
-        font-size: 0.875rem;
+        font-size: .875rem;
     }
 }
 .link {

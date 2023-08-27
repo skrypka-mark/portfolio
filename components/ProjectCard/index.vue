@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import type { ImageSpecsType } from '~/types/ImageSpecsType';
-import { SkillIconsMapping } from '~/enums/SkillIconsMapping';
+import { SkillIconsMapping } from '~/enums/SkillsMapping';
 
 interface IProjectCardProps {
     name: string;
@@ -60,8 +60,8 @@ watch(() => route.query, query => {
             ref=projectImageRef
         />
         <div class='flex flex-col items-center px-[5.5rem] max-lg:px-6 max-lg:py-6 max-w-prose'>
-            <a :href=preview target='_blank'>
-                <Typography variant='h3' class='mb-4 text-center'>
+            <a :href=preview target='_blank' class='mb-4 text-center'>
+                <Typography variant='h3'>
                     {{ name }}
                 </Typography>
             </a>

@@ -1,59 +1,64 @@
-<script setup>
-import Container from '~/components/Container';
+<script setup lang='ts'>
+const profileType = inject<Ref<string>>('profile-query');
+
+const frontendHero = {
+    title: 'Frontend Developer',
+    description: 'Hi, I\'m Mark Skrypka. A purposeful Frontend Developer based in Ukraine.',
+    skills: [
+        'react',
+        'react native',
+        'vue',
+        'nuxt',
+        'next',
+        'express'
+    ]
+};
+const backendHero = {
+    title: 'Backend Developer',
+    description: 'Hi, I\'m Mark Skrypka. A purposeful Backend Developer based in Ukraine.',
+    skills: [
+        'node',
+        'express',
+        'sequelize'
+    ]
+};
+const designHero = {
+    title: 'UI/UX Designer',
+    description: 'Hi, I\'m Mark Skrypka. A purposeful UI/UX Designer based in Ukraine.',
+    skills: [
+        'react',
+        'react native',
+        'vue',
+        'nuxt',
+        'next',
+        'express'
+    ]
+};
+
+const hero = computed(() => {
+    switch(profileType?.value) {
+        case 'backend':
+            return backendHero;
+            break;
+        case 'design':
+            return designHero;
+            break;
+        default:
+            return frontendHero;
+    }
+});
 </script>
 
 <template>
     <Container>
-        <SvgoEllipse1 :class='$style.ellipse' />
+        <SvgoEllipse1 class='ellipse1' />
         <section id='home' :class='$style.hero'>
             <div :class='$style.wrapper'>
                 <HeroImage />
-                <HeroContent />
+                <HeroContent :title=hero.title :description=hero.description :skills=hero.skills />
             </div>
         </section>
     </Container>
 </template>
 
-<style module lang='scss'>
-.ellipse {
-    position: absolute;
-    top: 15px;
-    left: -215px;
-
-    width: 689.42px;
-    height: 498.858px;
-    z-index: -3;
-
-    filter: blur(242px);
-}
-
-.hero {
-    display: flex;
-    align-items: center;
-
-    height: 100vh;
-
-    @media (max-width: $xl) {
-        // height: 90vh;
-        padding-top: calc(var(--header-height) + 2rem);
-    }
-
-    & > .wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        column-gap: 5rem;
-
-        width: 100%;
-        height: 387px;
-
-        @media (max-width: $xl) {
-            flex-direction: column;
-            row-gap: 2rem;
-
-            height: 100%;
-        }
-    }
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

@@ -96,46 +96,4 @@ watch(isMobileMenuDrawerOpen, value => {
     </Teleport>
 </template>
 
-<style module lang='scss'>
-.header {
-    position: fixed;
-    top: 0;
-
-    width: 100%;
-    height: var(--header-height);
-
-    background: var(--color-main-bg);
-    backdrop-filter: $backdrop-filter;
-
-    @media (max-width: $lg) {
-        border: var(--header-border-size) solid rgba(45, 46, 50, .2);
-    }
-
-    & > .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        height: 100%;
-
-        .logo {
-            & > svg {
-                height: 1rem;
-            }
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            column-gap: 20px;
-
-            height: 100%;
-
-            list-style: none;
-
-            .link {
-                text-transform: capitalize;
-            }
-        }
-    }
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

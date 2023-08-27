@@ -4,8 +4,12 @@ export enum SkillIconsMapping {
     'react native' = 'vscode-icons:file-type-reactjs',
     nuxt = 'skill-icons:nuxtjs-dark',
     next = 'teenyicons:nextjs-outline',
+    scss = 'devicon:sass',
     node = 'devicon:nodejs',
     express = 'skill-icons:expressjs-dark',
-    figma = 'devicon:figma',
-    scss = 'devicon:sass'
+    sequelize = 'logos:sequelize',
+    figma = 'devicon:figma'
+}
+export enum SkillNamesMapping {
+    scss = 'SCSS'
 }

@@ -14,6 +14,8 @@
     perspective: 1000px;
 }
 
+
+
 // Transitions
 
 .drawer-transition {
@@ -63,4 +65,64 @@
     &-leave-to {
         transform: translateX(-25%) scale(.9);
     }
+}
+
+
+
+// Ellipses
+
+.ellipse1 {
+    position: absolute;
+    top: 15px;
+    left: -215px;
+
+    width: 689.42px;
+    height: 498.858px;
+    z-index: -3;
+
+    filter: blur(242px);
+}
+.ellipse2 {
+    position: absolute;
+    top: -203px;
+    right: -450px;
+
+    width: 948.439px;
+    height: 548.983px;
+    z-index: -3;
+
+    filter: blur(242px);
+}
+.ellipse3 {
+    position: absolute;
+    top: -233px;
+    left: -280px;
+
+    width: 689.42px;
+    height: 498.858px;
+    z-index: -3;
+
+    filter: blur(227px);
+}
+.ellipse4 {
+    position: absolute;
+    top: 476px;
+    right: -241px;
+
+    width: 689.42px;
+    height: 498.858px;
+    z-index: -3;
+
+    filter: blur(227px);
+}
+.ellipse5 {
+    position: absolute;
+    bottom: -87px;
+    left: -455px;
+
+    width: 948.439px;
+    height: 548.983px;
+    z-index: -3;
+
+    filter: blur(227px);
 }
