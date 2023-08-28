@@ -17,12 +17,4 @@ defineProps<IIconButtonProps>();
     </a>
 </template>
 
-<style module lang='scss'>
-.icon-button {
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
-
-    color: inherit;
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

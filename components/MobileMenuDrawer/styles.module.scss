@@ -1,0 +1,7 @@
+.mobile-menu-drawer {
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+
+    background: var(--color-main-bg);
+    backdrop-filter: $backdrop-filter;
+}

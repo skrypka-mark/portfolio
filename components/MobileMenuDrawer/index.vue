@@ -41,12 +41,4 @@ const linkClickHandler = (hash: string) => {
     </Teleport>
 </template>
 
-<style lang='scss' module>
-.mobile-menu-drawer {
-    top: var(--header-height);
-    height: calc(100vh - var(--header-height));
-
-    background: var(--color-main-bg);
-    backdrop-filter: $backdrop-filter;
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

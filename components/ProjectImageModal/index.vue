@@ -36,7 +36,7 @@ watch(() => props.imageVisible, value => {
 <template>
     <Teleport to='body'>
         <Transition
-            name='backdrop'
+            name='backdrop-transition'
             mode='out-in'
             @before-enter='emits(`toggleImageVisibility`, true)'
             @after-enter='imageTransition = true'
@@ -73,30 +73,6 @@ watch(() => props.imageVisible, value => {
     </Teleport>
 </template>
 
-<style lang='scss'>
-.backdrop {
-    &-enter-active,
-    &-leave-active {
-        transition: all $transition-lg;
-    }
-
-    &-enter-from,
-    &-leave-to {
-        opacity: 0;
-    }
-}
-.fade-image {
-    &-enter-active,
-    &-leave-active {
-        transition: all $transition-lg;
-    }
-
-    &-enter-from,
-    &-leave-to {
-        opacity: 0;
-    }
-}
-</style>
 <style module lang='scss'>
 @keyframes scale-up {
     from {
@@ -161,18 +137,6 @@ watch(() => props.imageVisible, value => {
         width: v-bind('`${imageSpecs?.width}px`');
         height: v-bind('`${imageSpecs?.height}px`');
         border-radius: v-bind('imageSpecs?.borderRadius');
-    }
-}
-
-.fade-image {
-    opacity: 0;
-    transition: opacity .2s ease-in-out;
-
-    &.open {
-        opacity: 1;
-    }
-    &.close {
-        opacity: 0;
     }
 }
 

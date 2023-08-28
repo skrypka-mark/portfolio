@@ -18,6 +18,17 @@
 
 // Transitions
 
+.backdrop-transition {
+    &-enter-active,
+    &-leave-active {
+        transition: all $transition-lg;
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+    }
+}
 .drawer-transition {
     &-enter-active,
     &-leave-active {

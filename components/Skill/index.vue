@@ -17,14 +17,4 @@ defineProps<ISkillProps>();
     </div>
 </template>
 
-<style module lang='scss'>
-.skill {
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
-
-    & > .skill-name {
-        text-transform: capitalize;
-    }
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

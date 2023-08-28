@@ -92,23 +92,4 @@ watch(() => route.query, query => {
     </article>
 </template>
 
-<style module lang='scss'>
-.project-card {
-    display: flex;
-    align-items: center;
-
-    height: 24rem;
-
-    background: var(--color-card-bg);
-    padding: $spaces;
-    box-shadow: $box-shadow-main;
-    border-radius: $border-radius;
-
-    @media (max-width: $lg) {
-        flex-direction: column;
-        height: auto;
-        max-width: 35rem;
-        padding: calc($spaces / 2);
-    }
-}
-</style>
+<style module lang='scss' src='./styles.module.scss' />

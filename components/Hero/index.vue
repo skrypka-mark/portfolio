@@ -1,4 +1,12 @@
 <script setup lang='ts'>
+import { SkillIconsMapping } from '~/enums/SkillsMapping';
+
+interface IHero {
+    title: string;
+    description: string;
+    skills: string[];
+}
+
 const profileType = inject<Ref<string>>('profile-query');
 
 const frontendHero = {
@@ -35,7 +43,7 @@ const designHero = {
     ]
 };
 
-const hero = computed(() => {
+const hero: ComputedRef<IHero> = computed(() => {
     switch(profileType?.value) {
         case 'backend':
             return backendHero;
@@ -55,7 +63,11 @@ const hero = computed(() => {
         <section id='home' :class='$style.hero'>
             <div :class='$style.wrapper'>
                 <HeroImage />
-                <HeroContent :title=hero.title :description=hero.description :skills=hero.skills />
+                <HeroContent
+                    :title=hero.title
+                    :description=hero.description
+                    :skills='(hero.skills as (keyof typeof SkillIconsMapping)[])'
+                />
             </div>
         </section>
     </Container>

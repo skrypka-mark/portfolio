@@ -1,8 +1,10 @@
 <script setup lang='ts'>
+import { SkillIconsMapping } from '~/enums/SkillsMapping';
+
 interface IHeroContentProps {
     title: string;
     description: string;
-    skills: string[];
+    skills: (keyof typeof SkillIconsMapping)[];
 }
 
 defineProps<IHeroContentProps>();

@@ -30,4 +30,4 @@ const Component = props.is ?? VariantMapping[props.variant ?? 'body'];
     </component>
 </template>
 
-<style lang='scss' module src='./styles.module.scss' />
+<style module lang='scss' src='./styles.module.scss' />
