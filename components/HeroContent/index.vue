@@ -1,6 +1,4 @@
 <script setup lang='ts'>
-// import { onSnapshot, collection, doc } from 'firebase/firestore';
-// import { firebaseFirestore } from '~/server/lib/firestore';
 import { SkillIconsMapping } from '~/enums/SkillsMapping';
 
 interface IHeroContentProps {
@@ -10,14 +8,6 @@ interface IHeroContentProps {
 }
 
 defineProps<IHeroContentProps>();
-
-// onMounted(() => {
-//     onSnapshot(doc(firebaseFirestore, 'views', 'SF'), snapshot => {
-//         console.log('====================================');
-//         console.log(snapshot);
-//         console.log('====================================');
-//     });
-// });
 
 const { getViewsTotal } = usePageViews();
 
@@ -33,7 +23,7 @@ const totalViews = ref(await getViewsTotal());
             <Typography variant='body' :class='$style.body'>
                 {{ description }}
             </Typography>
-            <div class='max-xl:hidden absolute right-0 flex items-center gap-x-[4px]'>
+            <div class='max-xl:hidden absolute right-0 flex items-center gap-x-[4px]' v-if='$route.query.showViews'>
                 <Icon name='fluent:eye-12-filled' size='1rem' color='var(--color-font-body)' />
                 <Typography variant='body'>
                     {{ totalViews }}
