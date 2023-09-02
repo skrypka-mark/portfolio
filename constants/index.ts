@@ -1,5 +1,7 @@
 import type { IProject } from '~/interfaces/IProject';
 
+export const HERO_FULLNAME = 'Mark Skrypka';
+
 export const projects: IProject[] = [
     {
         name: 'Traveller',

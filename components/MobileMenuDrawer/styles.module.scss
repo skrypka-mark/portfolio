@@ -1,6 +1,8 @@
 .mobile-menu-drawer {
+    position: fixed;
+    inset: 0;
     top: var(--header-height);
-    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
 
     background: var(--color-main-bg);
     backdrop-filter: $backdrop-filter;

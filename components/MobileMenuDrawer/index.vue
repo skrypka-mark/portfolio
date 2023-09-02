@@ -19,7 +19,7 @@ const linkClickHandler = (hash: string) => {
     <Teleport to='body'>
         <Transition name='drawer-transition' mode='out-in'>
             <div
-                class='fixed inset-0 flex items-center justify-center'
+                class='flex items-center justify-center'
                 :class='$style[`mobile-menu-drawer`]'
                 v-if=open
             >

@@ -30,6 +30,7 @@
 
         @media (max-width: $xl) {
             margin-top: 2rem;
+            margin-bottom: calc($section-spaces / 2);
         }
     }
 }
