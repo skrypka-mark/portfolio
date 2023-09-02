@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@vueuse/nuxt": "^10.3.0",
+    "firebase": "^10.3.1",
     "sass": "^1.64.2"
   }
 }

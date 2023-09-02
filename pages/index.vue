@@ -4,6 +4,12 @@ const mainRef = ref(null);
 watchEffect(() => {
   provide('main-ref', mainRef);
 });
+
+const { addView } = usePageViews();
+
+onMounted(async () => {
+  await addView();
+});
 </script>
 
 <template>

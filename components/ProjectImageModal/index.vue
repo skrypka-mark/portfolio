@@ -44,14 +44,14 @@ watch(() => props.imageVisible, value => {
         >
             <div
                 :class='$style.backdrop'
-                :style='{ zIndex: open ? 8 : 7 }'
+                :style='{ zIndex: open ? 18 : 17 }'
                 @click=close
                 v-if=open
             />
         </Transition>
         <div
             :class='[$style[`image-container`], { [$style.open]: open, [$style.close]: !open }]'
-            :style='{ zIndex: open ? 10 : 9 }'
+            :style='{ zIndex: open ? 20 : 19 }'
             @click=close
             ref=imageContainerRef
             v-if=imageVisible
@@ -208,6 +208,7 @@ watch(() => props.imageVisible, value => {
 .backdrop {
     position: fixed;
     inset: 0;
+    z-index: 20;
     background: rgba(0, 0, 0, .7);
 }
 </style>

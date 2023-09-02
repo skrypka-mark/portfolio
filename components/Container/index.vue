@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 interface IContainerProps {
-    is: string;
+    is?: string;
 }
 
 withDefaults(

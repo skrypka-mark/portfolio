@@ -1,4 +1,6 @@
 <script setup lang='ts'>
+// import { onSnapshot, collection, doc } from 'firebase/firestore';
+// import { firebaseFirestore } from '~/server/lib/firestore';
 import { SkillIconsMapping } from '~/enums/SkillsMapping';
 
 interface IHeroContentProps {
@@ -8,6 +10,18 @@ interface IHeroContentProps {
 }
 
 defineProps<IHeroContentProps>();
+
+// onMounted(() => {
+//     onSnapshot(doc(firebaseFirestore, 'views', 'SF'), snapshot => {
+//         console.log('====================================');
+//         console.log(snapshot);
+//         console.log('====================================');
+//     });
+// });
+
+const { getViewsTotal } = usePageViews();
+
+const totalViews = ref(await getViewsTotal());
 </script>
 
 <template>
@@ -19,6 +33,12 @@ defineProps<IHeroContentProps>();
             <Typography variant='body' :class='$style.body'>
                 {{ description }}
             </Typography>
+            <div class='max-xl:hidden absolute right-0 flex items-center gap-x-[4px]'>
+                <Icon name='fluent:eye-12-filled' size='1rem' color='var(--color-font-body)' />
+                <Typography variant='body'>
+                    {{ totalViews }}
+                </Typography>
+            </div>
         </div>
         <div :class='$style[`socials-group`]' class='max-xl:justify-center'>
             <a href='https://www.linkedin.com/in/mark-skrypka' target='_blank'>
