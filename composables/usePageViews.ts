@@ -1,4 +1,12 @@
-import { getFirestore, collection, addDoc, getCountFromServer } from 'firebase/firestore';
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    addDoc,
+    getDocs,
+    getCountFromServer
+} from 'firebase/firestore';
 import { useFirebase } from '~/composables/useFirebase';
 
 export interface IViewDocument {
@@ -6,17 +14,20 @@ export interface IViewDocument {
 }
 
 export const usePageViews = () => {
-    const runtimeConfig = useRuntimeConfig();
     const { firebaseApp } = useFirebase();
     const firebaseFirestore = getFirestore(firebaseApp);
 
     const addView = async () => {
         try {
             const { ip } = await $fetch<{ ip: string }>('https://api.ipify.org?format=json');
-
-            if(runtimeConfig.public.EXCLUDED_IPS?.includes(ip)) return false;
     
             const colRef = collection(firebaseFirestore, 'views');
+
+            const q = query(colRef, where('ip', '==', ip));
+            const doc = await getDocs(q);
+
+            if(!doc.empty) return;
+
             const result = await addDoc(colRef, { ip });
             return result;
         } catch(e) {
